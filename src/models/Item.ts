@@ -1,4 +1,4 @@
-class Item {
+abstract class Item {
     private name: string
     private type: string
     private level: number

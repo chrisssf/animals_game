@@ -8,6 +8,10 @@ class Food extends Item {
         this.healthAddedPerLevel = healthAddedPerLevel
     }
 
+    public getHealthAddedPerLevel = () :number => {
+        return this.healthAddedPerLevel
+    }
+
 }
 
 export default Food

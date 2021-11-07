@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import Player from '../models/Player';
 
 
 interface Props {
-    player: Player | null
-    setPlayer: (player: Player) => void
+    player :any
+    setPlayer: (player: any) => void
 }
 
 const StartPage = ({player, setPlayer}: Props) => {
@@ -14,8 +13,9 @@ const StartPage = ({player, setPlayer}: Props) => {
 
     const handleStartGame = ():void => {
         if (playerName !== ""){
-            const player = new Player(playerName)
-            setPlayer(player)
+            const newPlayer = new Player(playerName)
+            const PlayerObject = {...newPlayer}
+            setPlayer(PlayerObject)
         }
     }
 

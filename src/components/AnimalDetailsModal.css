@@ -1,0 +1,32 @@
+.animal-details-modal {
+	
+    background-color: darkslateblue;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    position: absolute;
+    top: 18%;
+    left: 18%;
+    right: 18%;
+    bottom: 18%;
+    overflow: scroll;
+    border-radius: 10px;
+    border: solid 2px white;
+	z-index: 2;
+
+}
+
+.animal-details-modal > * > img {
+    width: 200px;
+}
+
+.animal-details-overlay {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	z-index: 2;
+}

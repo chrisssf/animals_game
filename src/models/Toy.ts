@@ -7,6 +7,10 @@ class Toy extends Item {
         super(name, type, level)
         this.expAddedPerLevel = expAddedPerLevel
     }
+
+    public getExpAddedPerLevel = () :number => {
+        return this.expAddedPerLevel
+    }
 }
 
 export default Toy

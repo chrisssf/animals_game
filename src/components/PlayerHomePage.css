@@ -1,0 +1,22 @@
+.player-home-animal-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.player-home-animal-container > div {
+    border: 1px solid black ;
+    background-color: rgb(206, 206, 185);
+    width: 200px;
+    padding: 10px;
+}
+
+.player-home-animal-container > div > p {
+    margin: 0px 0px 15px 0px;
+}
+
+.player-home-animal-container > div > img {
+    height: 150px;
+}

@@ -1,4 +1,4 @@
-class Character {
+abstract class Character {
     private name: string
     private level: number
     private currentExp: number
