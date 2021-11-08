@@ -41,7 +41,9 @@ function App() {
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
         />
-        <AnimalPage 
+        <AnimalPage
+          player={player}
+          setPlayer={setPlayer}
           animalToVisit={animalToVisit}
           setAnimalToVisit={setAnimalToVisit}
           animalToVisitHasChanged={animalToVisitHasChanged}

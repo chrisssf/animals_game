@@ -1,0 +1,14 @@
+.item-list-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.item-list-element{
+    border: 1px solid black ;
+    background-color: rgb(206, 206, 185);
+    width: 200px;
+    padding: 10px;
+}

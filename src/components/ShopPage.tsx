@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import './ShopPage.css'
+import './ShopPage.css'
+import ListItem from './ItemList'
 
 import Food from '../models/Food';
 import Toy from '../models/Toy';
@@ -39,65 +40,82 @@ const ShopPage = ({player, setPlayer} :Props) => {
     let football = new Toy("Football", "Ball", 15, 1, 10)
     let rubberDuck = new Toy("Rubber Duck", "Chew Toy", 10, 1, 5)
 
-    const handleBuyItem = (item :Toy | Food) :void => {
-        // console.log("thing", player.buyItem(item))
-        if(player.buyItem(item)) {
-            alert("Item Bought!")
-            setPlayer({...player})
-        }
-        else alert("not enough money!")
-    }
+    // const handleBuyItem = (item :Toy | Food) :void => { 
+    //     if(player.buyItem(item)) {
+    //         alert("Item Bought!")
+    //         setPlayer({...player})
+    //     }
+    //     else alert("not enough money!")
+    // }
 
-    const displayFoodsForSale = () :JSX.Element => {
-        let foodsToDisplay = foodForSale.map(food => {
-            return (
-                <div>
-                    <p>{food.getName()}</p>
-                    <p>Health Recovered: {food.getTotalHealthAdded()}</p>
-                    <p>Level: {food.getLevel()}</p>
-                    <p>Price: {food.getTotalPrice()}</p>
-                    <button onClick={() => handleBuyItem(food)}>BUY</button>
+    // const displayFoodsForSale = () :JSX.Element => {
+    //     let foodsToDisplay = foodForSale.map(food => {
+    //         return (
+    //             <div className="shop-item">
+    //                 <p>{food.getName()}</p>
+    //                 <p>Health Recovered: {food.getTotalHealthAdded()}</p>
+    //                 <p>Level: {food.getLevel()}</p>
+    //                 <p>Price: {food.getTotalPrice()}</p>
+    //                 <button onClick={() => handleBuyItem(food)}>BUY</button>
+    //             </div>
+    //         )
+    //     })
+    //     return (
+    //         <div className="shop-item-container">
+    //             {foodsToDisplay}
+    //         </div>
+    //     )
+    // }
 
-                </div>
-            )
-        })
-        return (
-            <div>
-                {foodsToDisplay}
-            </div>
-        )
-    }
-
-    const displayToysForSale = () :JSX.Element => {
-        let toysToDisplay = toysForSale.map(toy => {
-            return (
-                <div>
-                    <p>{toy.getName()}</p>
-                    <p>EXP added: {toy.getTotalExpAdded()}</p>
-                    <p>Level: {toy.getLevel()}</p>
-                    <p>Price: {toy.getTotalPrice()}</p>
-                    <button onClick={() => handleBuyItem(toy)}>BUY</button>
-                </div>
-            )
-        })
-        return (
-            <div>
-                {toysToDisplay}
-            </div>
-        )
-    }
+    // const displayToysForSale = () :JSX.Element => {
+    //     let toysToDisplay = toysForSale.map(toy => {
+    //         return (
+    //             <div className="shop-item">
+    //                 <p>{toy.getName()}</p>
+    //                 <p>EXP added: {toy.getTotalExpAdded()}</p>
+    //                 <p>Level: {toy.getLevel()}</p>
+    //                 <p>Price: {toy.getTotalPrice()}</p>
+    //                 <button onClick={() => handleBuyItem(toy)}>BUY</button>
+    //             </div>
+    //         )
+    //     })
+    //     return (
+    //         <div className="shop-item-container">
+    //             {toysToDisplay}
+    //         </div>
+    //     )
+    // }
 
     return (
         <div>
             <h2>Shop</h2>
-            {player && <p>Money: {player.getMoney()} <button onClick={()=>player.changeMoney(100)}>ADD MONEY</button></p>}
-            <div>
+            {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer({...player})}}>ADD MONEY</button></p>}
+            {/* make these a spearate component */}
+            {/* <div> 
                 <h3>Food For Sale</h3>
                 {displayFoodsForSale()}
             </div>
             <div>
                 <h3>Toys For Sale</h3>
                 {displayToysForSale()}
+            </div> */}
+            <div>
+                <h3>Food For Sale</h3>
+                <ListItem 
+                    items={foodForSale}
+                    player={player}
+                    setPlayer={setPlayer}
+                    activity={"buyFood"}
+                />
+            </div>
+            <div>
+                <h3>Toys For Sale</h3>
+                <ListItem 
+                    items={toysForSale}
+                    player={player}
+                    setPlayer={setPlayer}
+                    activity={"buyToys"}
+                />
             </div>
         </div>
     )
