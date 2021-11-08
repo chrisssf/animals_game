@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AnimalSelect.css'
 
 import AnimalDetailsModal from './AnimalDetailsModal';
@@ -20,14 +20,15 @@ interface Props {
 
 const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen}:Props) => {
 
-    let mouse = new Food("Mouse", "Meat", 20, 1)
-    let blueberries = new Food("Blueberries", "Berry", 5, 1)
-    let salmon = new Food("Salmon", "Fish", 8, 1)
-    let burger = new Food("Burger", "Meat", 10, 1)
+    let mouse = new Food("Mouse", "Meat", 20, 1, 10)
+    let blueberries = new Food("Blueberries", "Berry", 5, 1, 2)
+    let salmon = new Food("Salmon", "Fish", 8, 2, 5)
+    let burger = new Food("Burger", "Meat", 10, 1, 10)
+    let burger2 = new Food("Burger", "Meat", 10, 2, 10)
 
-    let teddy = new Toy("Teddy", "Cuddly Toy", 7, 1)
-    let football = new Toy("Football", "Ball", 15, 1)
-    let rubberDuck = new Toy("Rubber Duck", "Chew Toy", 10, 1)
+    let teddy = new Toy("Teddy", "Cuddly Toy", 7, 1, 3)
+    let football = new Toy("Football", "Ball", 15, 1, 10)
+    let rubberDuck = new Toy("Rubber Duck", "Chew Toy", 10, 1, 5)
 
     let bite = new Attack("Bite", "Speed", 15, "Poision", 20)
     let claw = new Attack("Claw", "Power", 25, "Bleeding", 10)
@@ -38,13 +39,21 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
     let bob = new Bear("Bob", "Bear", 50, 10, salmon, football, [claw])
     let tina = new Tiger("Tina", "Tiger", 50, 10, burger, rubberDuck, [pounce])
     // console.log(steve);
-    let animals :Animal[] = []
-    animals.push(steve)
-    animals.push(bob)
-    animals.push(tina)
+    // let animals :Animal[] = []
+    // animals.push(steve)
+    // animals.push(bob)
+    // animals.push(tina)
     // console.log(animals)
 
     const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
+    const [ animalsForAdoption , setAnimalsForAdoption ] = useState<Animal[]>([])
+
+    useEffect(() =>{
+        animalsForAdoption.push(steve)
+        animalsForAdoption.push(bob)
+        animalsForAdoption.push(tina)
+        setAnimalsForAdoption([...animalsForAdoption])
+    }, [])
 
     const handleOpenDetailsModal = (animal :Animal) => {
         setSelectedAnimal(animal)
@@ -52,7 +61,7 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
     }
 
     const displayAnimals = () :JSX.Element => {
-        let animalsToDisplay :JSX.Element[] = animals.map((animal, index) => {
+        let animalsToDisplay :JSX.Element[] = animalsForAdoption.map((animal, index) => {
             return (
                 <div className="animal-select-animal" key={index}>
                     <img alt={animal.getType()} src={require('../assets/' + animal.getName() + '.png').default}/>
@@ -83,6 +92,8 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
                 setSelectedAnimal={setSelectedAnimal}
                 player={player}
                 setPlayer={setPlayer}
+                animalsForAdoption={animalsForAdoption} 
+                setAnimalsForAdoption={setAnimalsForAdoption}
             />
         </div>
     )

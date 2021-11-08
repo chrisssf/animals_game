@@ -4,6 +4,10 @@ import './App.css';
 import StartPage from './components/StartPage';
 import PlayerHomePage from './components/PlayerHomePage';
 import AnimalSelect from './components/AnimalSelect';
+import AnimalPage from './components/AnimalPage'
+import ShopPage from './components/ShopPage';
+
+import Animal from './models/Animal';
 
 function App() {
 
@@ -13,6 +17,8 @@ function App() {
 
   const [ player, setPlayer ] = useState<any>(null)
   const [ animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen ] = useState<boolean>(false)
+  const [ animalToVisit, setAnimalToVisit ] = useState<Animal | null>(null)
+  const [ animalToVisitHasChanged, setAnimalToVisitHasChanged ] = useState<boolean>(false)
 
   return (
     <div className="App">
@@ -26,12 +32,24 @@ function App() {
           player={player}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
+          animalToVisit={animalToVisit}
+          setAnimalToVisit={setAnimalToVisit}
         />
         <AnimalSelect 
           player={player} 
           setPlayer={setPlayer}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
+        />
+        <AnimalPage 
+          animalToVisit={animalToVisit}
+          setAnimalToVisit={setAnimalToVisit}
+          animalToVisitHasChanged={animalToVisitHasChanged}
+          setAnimalToVisitHasChanged={setAnimalToVisitHasChanged}
+        />
+        <ShopPage 
+          player={player} 
+          setPlayer={setPlayer}
         />
       </header>
     </div>

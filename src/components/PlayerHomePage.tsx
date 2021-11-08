@@ -8,9 +8,11 @@ interface Props {
     player :any
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
+    animalToVisit :Animal | null
+    setAnimalToVisit :(animal :Animal | null) => void
 }
 
-const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen}: Props) =>{
+const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen, animalToVisit, setAnimalToVisit}: Props) =>{
     // will have some player details and list of current animals
     // every level / (few levels?) player can get new animal added to their collection
 
@@ -58,6 +60,8 @@ const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModal
                 setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
                 animal={selectedAnimal}
                 setSelectedAnimal={setSelectedAnimal}
+                animalToVisit={animalToVisit}
+                setAnimalToVisit={setAnimalToVisit}
             />}
         </div>)
 

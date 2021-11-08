@@ -30,3 +30,23 @@
     bottom: 0;
 	z-index: 2;
 }
+
+.animal-details-modal-container {
+    position: relative;
+}
+
+.animal-details-speech-container > img {
+    position: absolute;
+    width: 180px;
+    top: 0px;
+    right: 0px;
+}
+
+.animal-details-speech-container > p {
+    color: black;
+    z-index: 2;
+    position: absolute;
+    margin: 0px;
+    top: 35px;
+    right: 45px;
+}

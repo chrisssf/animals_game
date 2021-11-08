@@ -10,7 +10,7 @@ class Snake extends Animal {
     // }
 
     public talk = () :string =>{
-        return "SSSSSS...."
+        return "SSSS..."
     }
 }
 
