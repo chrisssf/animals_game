@@ -3,8 +3,8 @@ import Player from '../models/Player';
 
 
 interface Props {
-    player :any
-    setPlayer: (player: any) => void
+    player :Player
+    setPlayer: (player: Player) => void
 }
 
 const StartPage = ({player, setPlayer}: Props) => {
@@ -14,8 +14,8 @@ const StartPage = ({player, setPlayer}: Props) => {
     const handleStartGame = ():void => {
         if (playerName !== ""){
             const newPlayer = new Player(playerName)
-            const PlayerObject = {...newPlayer}
-            setPlayer(PlayerObject)
+            // const PlayerObject = {...newPlayer}
+            setPlayer(newPlayer)
         }
     }
 

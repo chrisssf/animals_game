@@ -3,14 +3,15 @@ import Modal from 'react-modal'
 import './AnimalDetailsModal.css'
 
 import Animal from '../models/Animal'
+import Player from '../models/Player'
 
 interface Props {
     animal :Animal | null
     setSelectedAnimal :(animal :Animal | null ) => void
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
-    player? :any
-    setPlayer? :(player :any) => void
+    player? :Player
+    setPlayer? :(player :Player) => void
     animalsForAdoption? :Animal[] 
     setAnimalsForAdoption? :(animals :Animal[]) => void
     animalToVisit? :Animal | null
@@ -38,11 +39,12 @@ const AnimalDetailsModal = ({
     }
     
     const handleAdoptAnimal = (animal :Animal) :void => {
-        if(player && setPlayer && animalsForAdoption && setAnimalsForAdoption){
+        if(player && setPlayer && animalsForAdoption && setAnimalsForAdoption){ //!!!!!!!!!!
             let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => animalforAdoption.getName() !== animal.getName()) 
             setAnimalsForAdoption(remainingAnimals)
             player.addAnimal(animal)
-            setPlayer({...player})
+            setPlayer(player)
+            // setPlayer({...player})
         }
         setSelectedAnimal(null)
         handleCloseModal()
@@ -62,6 +64,11 @@ const AnimalDetailsModal = ({
                 {image}
             </div>
         )
+    }
+
+    const disableAdoptButton = () :boolean => {
+        if(player) return player.getLevel() <= player.getAnimals().length
+        return false
     }
 
     const handleTalk = () :void => {
@@ -86,7 +93,7 @@ const AnimalDetailsModal = ({
                 <p>Health: {animal?.getHealth()}</p>
                 <p>Attack: {animal?.getAttack()}</p>
                 {/* <p>{animal.()}</p>attacks = attacks */}
-                {animalsForAdoption && <button onClick={() => handleAdoptAnimal(animal)}>ADOPT</button>}
+                {animalsForAdoption && <button disabled={disableAdoptButton()} onClick={() => handleAdoptAnimal(animal)}>ADOPT</button>}
                 {!animalsForAdoption && <button onClick={() => handleVisitAnimal(animal)}>VISIT</button>}
                 <button onClick={() => handleCloseModal()}>BACK</button>
                 {talk && speechBubble()}

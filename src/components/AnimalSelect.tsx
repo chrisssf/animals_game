@@ -3,6 +3,7 @@ import './AnimalSelect.css'
 
 import AnimalDetailsModal from './AnimalDetailsModal';
 
+import Player from '../models/Player';
 import Animal from '../models/Animal';
 import Snake from '../models/Snake';
 import Bear from '../models/Bear';
@@ -12,8 +13,8 @@ import Toy from '../models/Toy';
 import Attack from '../models/Attack';
 
 interface Props {
-    player :any
-    setPlayer :(player :any) => void
+    player :Player
+    setPlayer :(player :Player) => void
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
 }
@@ -55,6 +56,10 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
         setAnimalsForAdoption([...animalsForAdoption])
     }, [])
 
+    const getNumberOfAdoptionsAvailable = () :number => {
+        return player.getLevel() - player.getAnimals().length
+    }
+
     const handleOpenDetailsModal = (animal :Animal) => {
         setSelectedAnimal(animal)
         setAnimalDetailsModalIsOpen(true)
@@ -81,9 +86,11 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
     return (
         <div>
             <h2>Animal Select</h2>
+            <p>A new animal can be adopted every time your Player Level increases!</p>
+            {player && <p>You have {getNumberOfAdoptionsAvailable()} adoptions available</p>}  {/* !!!!!!!!!!! */}
             {displayAnimals()}
-            <p>Name: {steve.getName()}</p>
-            <p>Favorite Food: {steve.getFavouriteFood().getName()}</p>
+            {/* <p>Name: {steve.getName()}</p>
+            <p>Favorite Food: {steve.getFavouriteFood().getName()}</p> */}
 
             <AnimalDetailsModal 
                 animalDetailsModalIsOpen={animalDetailsModalIsOpen} 

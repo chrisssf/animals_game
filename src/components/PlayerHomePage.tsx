@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './PlayerHomePage.css'
+
+import Player from '../models/Player';
 import Animal from '../models/Animal'
 import AnimalDetailsModal from './AnimalDetailsModal'
 
 
 interface Props {
-    player :any
+    player :Player
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
     animalToVisit :Animal | null
@@ -43,16 +45,17 @@ const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModal
 
     return (
         <div>
-            <h2>Player Home Page</h2>
             {/* {console.log("player", player)} */}
-            {player !== null && <div>
+            {player !== null && <div>   {/* !!!!!!!!! */}
+                <h2>Player Info</h2>
+
                 {/* <p>Name: {(player !== null) ? player.getName() : null}</p>
                 <p>Level: {(player !== null) ? player.getLevel() : null}</p>
                 <p>EXP: {(player !== null) ? player.getCurrentExp() : null} / 100</p> */}
 
-                <p>Name: {player.getName()}</p>
-                <p>Level: {player.getLevel()}</p>
-                <p>EXP: {player.getCurrentExp()} / 100</p>
+                <p>Player Name: {player.getName()}</p>
+                <p>Player Level: {player.getLevel()}</p>
+                <p>Player EXP: {player.getCurrentExp()} / 100</p>
                 {displayPlayerAnimals()}
             </div>}
             {selectedAnimal && <AnimalDetailsModal 

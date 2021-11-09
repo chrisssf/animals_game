@@ -3,17 +3,20 @@ import React, { useState } from 'react';
 import ItemList from './ItemList';
 
 import Animal from '../models/Animal';
+import Player from '../models/Player';
 import Item from '../models/Item';
 import Toy from '../models/Toy'
 import Food from '../models/Food'
 
 interface Props {
-    player :any
-    setPlayer :(player :any) => void
+    player :Player
+    setPlayer :(player :Player) => void
     animalToVisit :Animal | null
     setAnimalToVisit :(animal :Animal | null) => void
     animalToVisitHasChanged :boolean 
     setAnimalToVisitHasChanged  :(boolean :boolean) => void
+    playerHasChanged :boolean
+    setPlayerHasChanged :(boolean :boolean) => void
 }
 
 const AnimalPage = ({
@@ -22,7 +25,9 @@ const AnimalPage = ({
     animalToVisit, 
     setAnimalToVisit, 
     animalToVisitHasChanged, 
-    setAnimalToVisitHasChanged 
+    setAnimalToVisitHasChanged,
+    playerHasChanged,
+    setPlayerHasChanged,
 } :Props) => {
 
     const [ activity, setActivity ] = useState<string>("")
@@ -30,23 +35,39 @@ const AnimalPage = ({
 
     const handleGiveLove = () :void => {
         animalToVisit?.addExp(50)
+        player.addExp(50)
+        setPlayer(player)
+        setPlayerHasChanged(!playerHasChanged)
+        // setPlayer({...player})
         setAnimalToVisit(animalToVisit)
         setAnimalToVisitHasChanged(!animalToVisitHasChanged)
     }
 
-    const handleFeed = () :void => {
+    const handleClickFeed = () :void => {
         setActivity("feed")
         setItems(player.getFoods())
     }
 
-    const handlePlay = () :void => {
+    const handleClickPlay = () :void => {
         setActivity("play")
         setItems(player.getToys())
     }
 
     const giveAnimalItem = (item :Item) :void => {
-        if(item instanceof Food) animalToVisit?.eat(item)
-        if(item instanceof Toy) animalToVisit?.play(item)
+        if(item instanceof Food) {
+            animalToVisit?.eat(item)
+            player.removeFood(item)
+            handleClickFeed()
+        }
+        if(item instanceof Toy) {
+            animalToVisit?.play(item)
+            player.addExp(item.getTotalExpAdded())
+            player.removeToy(item)
+            handleClickPlay()
+        }
+        setPlayer(player)
+        setPlayerHasChanged(!playerHasChanged)
+        // setPlayer({...player})
         setAnimalToVisit(animalToVisit)
         setAnimalToVisitHasChanged(!animalToVisitHasChanged)
     }
@@ -60,8 +81,8 @@ const AnimalPage = ({
                 <p>Current EXP: {animalToVisit.getCurrentExp()} / 100</p>
                 <img alt={animalToVisit?.getType()} src={require('../assets/' + animalToVisit?.getName() + '.png').default}/>
                 <button onClick={() => handleGiveLove()}>Give Love</button>
-                <button onClick={() => handleFeed()}>Feed</button>
-                <button onClick={() => handlePlay()}>Play</button>
+                <button onClick={() => handleClickFeed()}>Feed</button>
+                <button onClick={() => handleClickPlay()}>Play</button>
             </div>}
             {activity !== "" && <ItemList 
                 items={items}
@@ -69,6 +90,8 @@ const AnimalPage = ({
                 setPlayer={setPlayer}
                 activity={activity}
                 giveAnimalItem={giveAnimalItem}
+                playerHasChanged={playerHasChanged}
+                setPlayerHasChanged={setPlayerHasChanged}
             />}
         </div>
     )

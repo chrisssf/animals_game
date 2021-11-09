@@ -1,24 +1,29 @@
 import React from "react";
 import './ItemList.css'
 
+import Player from "../models/Player";
 import Item from "../models/Item";
 import Toy from '../models/Toy'
 import Food from '../models/Food'
 
 interface Props {
     items :Toy[] | Food[]
-    player :any
-    setPlayer :(player :any) => void
+    player :Player
+    setPlayer :(player :Player) => void
     activity :string
     giveAnimalItem? :(item :Item) => void
+    playerHasChanged :boolean
+    setPlayerHasChanged :(boolean :boolean) => void
 }
 
-const ItemList = ({items, player, setPlayer, activity, giveAnimalItem} :Props) => {
+const ItemList = ({items, player, setPlayer, activity, giveAnimalItem, playerHasChanged, setPlayerHasChanged} :Props) => {
 
     const handleBuyItem = (item :Toy | Food) :void => {
         if(player.buyItem(item)) {
             alert("Item Bought!")
-            setPlayer({...player})
+            setPlayer(player)
+            setPlayerHasChanged(!playerHasChanged)
+            // setPlayer({...player})
         }
         else alert("not enough money!")
     }
@@ -48,7 +53,7 @@ const ItemList = ({items, player, setPlayer, activity, giveAnimalItem} :Props) =
     return (
         <div>
             <p>Item List</p>
-            {displayItems()}
+                {displayItems()}
         </div>
     )
 }

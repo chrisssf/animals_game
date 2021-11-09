@@ -8,14 +8,16 @@ import AnimalPage from './components/AnimalPage'
 import ShopPage from './components/ShopPage';
 
 import Animal from './models/Animal';
+import Player from './models/Player';
 
 function App() {
 
   // let testPlayer = new Player("test")
   // console.log("test", Object.keys(testPlayer))
   // console.log("typeof testPlayer", typeof testPlayer)
-
-  const [ player, setPlayer ] = useState<any>(null)
+  const placeholder = new Player("")
+  const [ player, setPlayer ] = useState<Player>(placeholder)
+  const [ playerHasChanged, setPlayerHasChanged ] = useState<boolean>(false)
   const [ animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen ] = useState<boolean>(false)
   const [ animalToVisit, setAnimalToVisit ] = useState<Animal | null>(null)
   const [ animalToVisitHasChanged, setAnimalToVisitHasChanged ] = useState<boolean>(false)
@@ -24,10 +26,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>APP</p>
-        <StartPage 
+        {player.getName() === "" && <StartPage 
           player={player} 
           setPlayer={setPlayer}
-        />
+        />}
         <PlayerHomePage 
           player={player}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
@@ -48,10 +50,14 @@ function App() {
           setAnimalToVisit={setAnimalToVisit}
           animalToVisitHasChanged={animalToVisitHasChanged}
           setAnimalToVisitHasChanged={setAnimalToVisitHasChanged}
+          playerHasChanged={playerHasChanged}
+          setPlayerHasChanged={setPlayerHasChanged}
         />
         <ShopPage 
           player={player} 
           setPlayer={setPlayer}
+          playerHasChanged={playerHasChanged}
+          setPlayerHasChanged={setPlayerHasChanged}
         />
       </header>
     </div>

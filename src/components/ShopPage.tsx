@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './ShopPage.css'
 import ListItem from './ItemList'
 
+import Player from '../models/Player';
 import Food from '../models/Food';
 import Toy from '../models/Toy';
 
 interface Props {
-    player :any
-    setPlayer :(player :any) => void
+    player :Player
+    setPlayer :(player :Player) => void
+    playerHasChanged :boolean
+    setPlayerHasChanged :(boolean :boolean) => void
 }
 
-const ShopPage = ({player, setPlayer} :Props) => {
+const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged} :Props) => {
 
     const [ toysForSale, setToysForSale ] = useState<Toy[]>([])
     const [ foodForSale, setFoodForSale ] = useState<Food[]>([])
@@ -89,7 +92,8 @@ const ShopPage = ({player, setPlayer} :Props) => {
     return (
         <div>
             <h2>Shop</h2>
-            {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer({...player})}}>ADD MONEY</button></p>}
+            {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer(player); setPlayerHasChanged(!playerHasChanged)}}>ADD MONEY</button></p>} {/* !!!!!!!!! */}
+            {/* {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer({...player})}}>ADD MONEY</button></p>} */}
             {/* make these a spearate component */}
             {/* <div> 
                 <h3>Food For Sale</h3>
@@ -106,6 +110,8 @@ const ShopPage = ({player, setPlayer} :Props) => {
                     player={player}
                     setPlayer={setPlayer}
                     activity={"buyFood"}
+                    playerHasChanged={playerHasChanged}
+                    setPlayerHasChanged={setPlayerHasChanged}
                 />
             </div>
             <div>
@@ -115,6 +121,8 @@ const ShopPage = ({player, setPlayer} :Props) => {
                     player={player}
                     setPlayer={setPlayer}
                     activity={"buyToys"}
+                    playerHasChanged={playerHasChanged}
+                    setPlayerHasChanged={setPlayerHasChanged}
                 />
             </div>
         </div>

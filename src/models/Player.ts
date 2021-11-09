@@ -35,7 +35,6 @@ class Player extends Character{
     } 
 
     public buyItem = (item :Item) :boolean => {
-        console.log("here")
         if(this.money > item.getTotalPrice()){
             if(item instanceof Food) this.addFood(item)
             if(item instanceof Toy) this.addToys(item)
@@ -66,7 +65,7 @@ class Player extends Character{
         this.toys.push(toy)
     }
 
-    public removeToys = (toy :Toy) :void => {
+    public removeToy = (toy :Toy) :void => {
         let remainingToys :Toy[] = this.toys.filter(ownedToy => ownedToy.getName() !== toy.getName())
         this.toys = remainingToys
     }

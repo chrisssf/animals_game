@@ -10,7 +10,7 @@ class Bear extends Animal {
     // }
 
     public talk = () :string =>{
-        return "ROAR!!!!"
+        return "ROAR!!!"
     }
 }
 
