@@ -17,9 +17,18 @@ interface Props {
     setPlayer :(player :Player) => void
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
+    displayedPages :string[]
+    setDisplayedPages :(pages :string[]) => void
 }
 
-const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen}:Props) => {
+const AnimalSelect = ({
+    player, 
+    setPlayer, 
+    animalDetailsModalIsOpen, 
+    setAnimalDetailsModalIsOpen,
+    displayedPages,
+    setDisplayedPages
+}:Props) => {
 
     let mouse = new Food("Mouse", "Meat", 20, 1, 10)
     let blueberries = new Food("Blueberries", "Berry", 5, 1, 2)
@@ -49,7 +58,7 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
     const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
     const [ animalsForAdoption , setAnimalsForAdoption ] = useState<Animal[]>([])
 
-    useEffect(() =>{
+    useEffect(() => {
         animalsForAdoption.push(steve)
         animalsForAdoption.push(bob)
         animalsForAdoption.push(tina)
@@ -85,23 +94,25 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
 
     return (
         <div>
-            <h2>Animal Select</h2>
-            <p>A new animal can be adopted every time your Player Level increases!</p>
-            <p>You have {getNumberOfAdoptionsAvailable()} adoptions available</p>
-            {displayAnimals()}
-            {/* <p>Name: {steve.getName()}</p>
-            <p>Favorite Food: {steve.getFavouriteFood().getName()}</p> */}
-
-            <AnimalDetailsModal 
-                animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
-                setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-                animal={selectedAnimal}
-                setSelectedAnimal={setSelectedAnimal}
-                player={player}
-                setPlayer={setPlayer}
-                animalsForAdoption={animalsForAdoption} 
-                setAnimalsForAdoption={setAnimalsForAdoption}
-            />
+            {displayedPages.includes("AnimalSelect") && <div>
+                <h2>Animal Select</h2>
+                <p>A new animal can be adopted every time your Player Level increases!</p>
+                <p>You have {getNumberOfAdoptionsAvailable()} adoptions available</p>
+                {displayAnimals()}
+                
+                <AnimalDetailsModal 
+                    animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
+                    setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
+                    animal={selectedAnimal}
+                    setSelectedAnimal={setSelectedAnimal}
+                    player={player}
+                    setPlayer={setPlayer}
+                    animalsForAdoption={animalsForAdoption} 
+                    setAnimalsForAdoption={setAnimalsForAdoption}
+                    displayedPages={displayedPages}
+                    setDisplayedPages={setDisplayedPages}
+                />
+            </div>}
         </div>
     )
 }

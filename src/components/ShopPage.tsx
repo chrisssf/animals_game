@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ShopPage.css'
-import ListItem from './ItemList'
+import ItemList from './ItemList'
 
 import Player from '../models/Player';
 import Food from '../models/Food';
@@ -11,9 +11,11 @@ interface Props {
     setPlayer :(player :Player) => void
     playerHasChanged :boolean
     setPlayerHasChanged :(boolean :boolean) => void
+    displayedPages :string[]
+    setDisplayedPages :(pages :string[]) => void
 }
 
-const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged} :Props) => {
+const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, displayedPages, setDisplayedPages} :Props) => {
 
     const [ toysForSale, setToysForSale ] = useState<Toy[]>([])
     const [ foodForSale, setFoodForSale ] = useState<Food[]>([])
@@ -91,36 +93,62 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged} :Pr
 
     return (
         <div>
-            <h2>Shop</h2>
-            <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer(player); setPlayerHasChanged(!playerHasChanged)}}>ADD MONEY</button></p> {/* !!!!!!!!! */}
-            {/* {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer({...player})}}>ADD MONEY</button></p>} */}
-            {/* make these a spearate component */}
-            {/* <div> 
-                <h3>Food For Sale</h3>
-                {displayFoodsForSale()}
-            </div>
-            <div>
-                <h3>Toys For Sale</h3>
-                {displayToysForSale()}
-            </div> */}
-            <div>
-                <h3>Food For Sale</h3>
-                <ListItem 
-                    items={foodForSale}
+            {!displayedPages.includes("MyItems") && <div>
+                <h2>Shop</h2>
+                <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer(player); setPlayerHasChanged(!playerHasChanged)}}>ADD MONEY</button></p> {/* !!!!!!!!! */}
+                {/* {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer({...player})}}>ADD MONEY</button></p>} */}
+                {/* make these a spearate component */}
+                {/* <div> 
+                    <h3>Food For Sale</h3>
+                    {displayFoodsForSale()}
+                </div>
+                <div>
+                    <h3>Toys For Sale</h3>
+                    {displayToysForSale()}
+                </div> */}
+                <div className="shop-item-container">
+                    <h3>Food For Sale</h3>
+                    <ItemList 
+                        items={foodForSale}
+                        player={player}
+                        setPlayer={setPlayer}
+                        activity={"buyFood"}
+                        playerHasChanged={playerHasChanged}
+                        setPlayerHasChanged={setPlayerHasChanged}
+                    />
+                </div>
+                <div className="shop-item-container">
+                    <h3>Toys For Sale</h3>
+                    <ItemList 
+                        items={toysForSale}
+                        player={player}
+                        setPlayer={setPlayer}
+                        activity={"buyToys"}
+                        playerHasChanged={playerHasChanged}
+                        setPlayerHasChanged={setPlayerHasChanged}
+                    />
+                </div>
+            </div>}
+            <h2>My Items</h2>
+            {displayedPages.includes("MyItems") && <p>Buy Items <button onClick={() => setDisplayedPages(["Shop"])}>HERE</button></p>}
+            <div className="shop-item-container shop-owned">
+                <h3>Owned Food</h3>
+                <ItemList 
+                    items={player.getFoods()}
                     player={player}
                     setPlayer={setPlayer}
-                    activity={"buyFood"}
+                    activity={""}
                     playerHasChanged={playerHasChanged}
                     setPlayerHasChanged={setPlayerHasChanged}
                 />
             </div>
-            <div>
-                <h3>Toys For Sale</h3>
-                <ListItem 
-                    items={toysForSale}
+            <div className="shop-item-container shop-owned">
+                <h3>Owned Toys</h3>
+                <ItemList 
+                    items={player.getToys()}
                     player={player}
                     setPlayer={setPlayer}
-                    activity={"buyToys"}
+                    activity={""}
                     playerHasChanged={playerHasChanged}
                     setPlayerHasChanged={setPlayerHasChanged}
                 />

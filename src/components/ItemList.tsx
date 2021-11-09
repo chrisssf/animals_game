@@ -32,9 +32,9 @@ const ItemList = ({items, player, setPlayer, activity, giveAnimalItem, playerHas
         let itemsToDisplay :JSX.Element[] = items.map((item, index) => {
             return (
                 <div className="item-list-element" key={index}>
-                    <p>{item.getName()}</p>
-                    {item instanceof Toy && <p>EXP added: {item.getTotalExpAdded()}</p>}
-                    {item instanceof Food && <p>Health Recovered: {item.getTotalHealthAdded()}</p>}
+                    <h4>{item.getName()}</h4>
+                    {item instanceof Toy && <p>EXP: +{item.getTotalExpAdded()}</p>}
+                    {item instanceof Food && <p>Health: +{item.getTotalHealthAdded()}</p>}
                     <p>Level: {item.getLevel()}</p>
                     <p>Price: {item.getTotalPrice()}</p>
                     {/* would be cleaner to move these to spearate component... */}
@@ -52,8 +52,7 @@ const ItemList = ({items, player, setPlayer, activity, giveAnimalItem, playerHas
 
     return (
         <div>
-            <p>Item List</p>
-                {displayItems()}
+            {displayItems()}
         </div>
     )
 }

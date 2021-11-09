@@ -21,29 +21,35 @@ function App() {
   const [ animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen ] = useState<boolean>(false)
   const [ animalToVisit, setAnimalToVisit ] = useState<Animal | null>(null)
   const [ animalToVisitHasChanged, setAnimalToVisitHasChanged ] = useState<boolean>(false)
+  const [ displayedPages, setDisplayedPages ] = useState<string[]>([])
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>APP</p>
+        <h2>Animal Game</h2>
         {player.getName() === "" && <StartPage 
           player={player} 
           setPlayer={setPlayer}
+          setDisplayedPages={setDisplayedPages}
         />}
-        <PlayerHomePage 
+        {player.getName() !== "" && <PlayerHomePage 
           player={player}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
           animalToVisit={animalToVisit}
           setAnimalToVisit={setAnimalToVisit}
-        />
+          displayedPages={displayedPages}
+          setDisplayedPages={setDisplayedPages}
+        />}
         <AnimalSelect 
           player={player} 
           setPlayer={setPlayer}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-        />
-        <AnimalPage
+          displayedPages={displayedPages}
+          setDisplayedPages={setDisplayedPages}
+        /> {/* } */}
+        {displayedPages.includes("AnimalPage") && <AnimalPage
           player={player}
           setPlayer={setPlayer}
           animalToVisit={animalToVisit}
@@ -52,13 +58,15 @@ function App() {
           setAnimalToVisitHasChanged={setAnimalToVisitHasChanged}
           playerHasChanged={playerHasChanged}
           setPlayerHasChanged={setPlayerHasChanged}
-        />
-        <ShopPage 
+        />}
+        {displayedPages.includes("Shop") && <ShopPage 
           player={player} 
           setPlayer={setPlayer}
           playerHasChanged={playerHasChanged}
           setPlayerHasChanged={setPlayerHasChanged}
-        />
+          displayedPages={displayedPages}
+          setDisplayedPages={setDisplayedPages}
+        />}
       </header>
     </div>
   );

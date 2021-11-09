@@ -5,9 +5,10 @@ import Player from '../models/Player';
 interface Props {
     player :Player
     setPlayer: (player: Player) => void
+    setDisplayedPages :(pages :string[]) => void
 }
 
-const StartPage = ({player, setPlayer}: Props) => {
+const StartPage = ({player, setPlayer, setDisplayedPages}: Props) => {
 
     const [ playerName, setPlayerName ] = useState<string>("")
 
@@ -16,6 +17,9 @@ const StartPage = ({player, setPlayer}: Props) => {
             const newPlayer = new Player(playerName)
             // const PlayerObject = {...newPlayer}
             setPlayer(newPlayer)
+            setDisplayedPages(["AnimalSelect"])
+        } else {
+            alert("Please Type your name")
         }
     }
 

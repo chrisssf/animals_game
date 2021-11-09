@@ -12,21 +12,60 @@ interface Props {
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
     animalToVisit :Animal | null
     setAnimalToVisit :(animal :Animal | null) => void
+    displayedPages :string[]
+    setDisplayedPages :(pages :string[]) => void
 }
 
-const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen, animalToVisit, setAnimalToVisit}: Props) =>{
+const PlayerHomePage = ({
+    player, 
+    animalDetailsModalIsOpen, 
+    setAnimalDetailsModalIsOpen, 
+    animalToVisit, 
+    setAnimalToVisit,
+    displayedPages,
+    setDisplayedPages,
+}: Props) =>{
     // will have some player details and list of current animals
     // every level / (few levels?) player can get new animal added to their collection
 
-  const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
+    const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
+
+    const handleClickMyAnimals = () :void => {
+        setDisplayedPages(["MyAnimals"])
+    }
+    const handleClickMyItems = () :void => {
+        setDisplayedPages(["Shop", "MyItems"])
+
+    }
+    const handleClickShop = () :void => {
+        setDisplayedPages(["Shop"])
+
+    }
+    const handleClickAdoptAnimal = () :void => {
+        setDisplayedPages(["AnimalSelect"])
+    }
+
+    const displayHelpMessage = () :JSX.Element => {
+        const adoptButton :JSX.Element = <button onClick={() => setDisplayedPages(["AnimalSelect"])}>HERE!</button>
+        if (player.getAnimals().length === 0) {
+            return <p>Adopt an Animal {adoptButton}</p>
+        } else if (getNumberOfAdoptionsAvailable() > 0) {
+            let s :string = ""
+            getNumberOfAdoptionsAvailable() > 1 ? s = "s" : s = ""
+            return <p>You can currently adopt {getNumberOfAdoptionsAvailable()} Animal{s}, click {adoptButton} to adopt!</p>
+        } else {
+            return <p>Increase Player Level to adopt more Animals</p>
+        }
+    }
 
     const displayPlayerAnimals = () :JSX.Element=> {
         const playerAnimals :Animal[] = player.getAnimals()
         const playerAnimalsDisplay = playerAnimals.map((animal, index) => {
             return (
-                <div onClick={() => handleClickAnimal(animal)} key={index}>
-                    <p>{animal.getName()}</p>
-                    <img alt={animal.getType()} src={require('../assets/' + animal.getName() + '.png').default}/>
+                <div key={index}>
+                    <p onClick={() => handleClickAnimal(animal)} >{animal.getName()}</p>
+                    <img onClick={() => handleClickAnimal(animal)} alt={animal.getType()} src={require('../assets/' + animal.getName() + '.png').default}/>
+                    <button onClick={() => handleVisitAnimal(animal)}>VISIT</button>
                 </div>
             )
         })
@@ -42,22 +81,38 @@ const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModal
         setAnimalDetailsModalIsOpen(true)
     }
 
+    const handleVisitAnimal = (animal :Animal) :void => {
+        setAnimalToVisit(animal)
+        setDisplayedPages(["AnimalPage"])
+        // handleCloseModal()
+        setSelectedAnimal(null)
+        setAnimalDetailsModalIsOpen(false)
+    }
+
+    const getNumberOfAdoptionsAvailable = () :number => {
+        return player.getLevel() - player.getAnimals().length
+    }
 
     return (
         <div>
-            {/* {console.log("player", player)} */}
-            <div>
+            <div className="player-info-container">
                 <h2>Player Info</h2>
-
-                {/* <p>Name: {(player !== null) ? player.getName() : null}</p>
-                <p>Level: {(player !== null) ? player.getLevel() : null}</p>
-                <p>EXP: {(player !== null) ? player.getCurrentExp() : null} / 100</p> */}
-
-                <p>Player Name: {player.getName()}</p>
-                <p>Player Level: {player.getLevel()}</p>
-                <p>Player EXP: {player.getCurrentExp()} / 100</p>
-                {displayPlayerAnimals()}
+                <button onClick={() => handleClickMyAnimals()}>My Animals ({player.getAnimals().length})</button>
+                <button onClick={() => handleClickMyItems()}>My Items</button>
+                <button onClick={() => handleClickShop()}>Shop</button>
+                <button onClick={() => handleClickAdoptAnimal()}>Adopt Animal ({getNumberOfAdoptionsAvailable()})</button>
+                
+                <div className="player-info-information">
+                    <p><b>Player Name:</b> {player.getName()}</p>
+                    <p><b>Player Level:</b> {player.getLevel()}</p>
+                    <p><b>Player EXP:</b> {player.getCurrentExp()} / 100</p>
+                </div>
             </div>
+            {displayedPages.includes("MyAnimals") && <div>
+                <h2>My Animals</h2>
+                {displayHelpMessage()}
+                {displayPlayerAnimals()}
+            </div>}
             {selectedAnimal && <AnimalDetailsModal 
                 animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
                 setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
@@ -65,6 +120,9 @@ const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModal
                 setSelectedAnimal={setSelectedAnimal}
                 animalToVisit={animalToVisit}
                 setAnimalToVisit={setAnimalToVisit}
+                displayedPages={displayedPages}
+                setDisplayedPages={setDisplayedPages}
+                handleVisitAnimal={handleVisitAnimal}
             />}
         </div>)
 

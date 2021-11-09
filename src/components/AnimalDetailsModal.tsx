@@ -16,6 +16,9 @@ interface Props {
     setAnimalsForAdoption? :(animals :Animal[]) => void
     animalToVisit? :Animal | null
     setAnimalToVisit? :(animal :Animal | null) => void
+    displayedPages :string[]
+    setDisplayedPages :(pages :string[]) => void
+    handleVisitAnimal? :(animal :Animal) => void
 }
 
 const AnimalDetailsModal = ({ 
@@ -28,7 +31,10 @@ const AnimalDetailsModal = ({
     animalsForAdoption,
     setAnimalsForAdoption,
     animalToVisit,
-    setAnimalToVisit
+    setAnimalToVisit,
+    displayedPages,
+    setDisplayedPages,
+    handleVisitAnimal,
 }:Props) => {
 
     const [ talk, setTalk ] = useState<boolean>(false)
@@ -47,11 +53,7 @@ const AnimalDetailsModal = ({
             // setPlayer({...player})
         }
         setSelectedAnimal(null)
-        handleCloseModal()
-    }
-
-    const handleVisitAnimal = (animal :Animal) :void => {
-        if(setAnimalToVisit) setAnimalToVisit(animal)  
+        setDisplayedPages(["MyAnimals"])
         handleCloseModal()
     }
 
@@ -94,7 +96,7 @@ const AnimalDetailsModal = ({
                 <p>Attack: {animal?.getAttack()}</p>
                 {/* <p>{animal.()}</p>attacks = attacks */}
                 {animalsForAdoption && <button disabled={disableAdoptButton()} onClick={() => handleAdoptAnimal(animal)}>ADOPT</button>}
-                {!animalsForAdoption && <button onClick={() => handleVisitAnimal(animal)}>VISIT</button>}
+                {handleVisitAnimal && <button onClick={() => handleVisitAnimal(animal)}>VISIT</button>}
                 <button onClick={() => handleCloseModal()}>BACK</button>
                 {talk && speechBubble()}
             </div>}
