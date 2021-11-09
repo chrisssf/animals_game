@@ -87,7 +87,7 @@ const AnimalSelect = ({player, setPlayer, animalDetailsModalIsOpen, setAnimalDet
         <div>
             <h2>Animal Select</h2>
             <p>A new animal can be adopted every time your Player Level increases!</p>
-            {player && <p>You have {getNumberOfAdoptionsAvailable()} adoptions available</p>}  {/* !!!!!!!!!!! */}
+            <p>You have {getNumberOfAdoptionsAvailable()} adoptions available</p>
             {displayAnimals()}
             {/* <p>Name: {steve.getName()}</p>
             <p>Favorite Food: {steve.getFavouriteFood().getName()}</p> */}

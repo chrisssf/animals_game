@@ -92,7 +92,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged} :Pr
     return (
         <div>
             <h2>Shop</h2>
-            {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer(player); setPlayerHasChanged(!playerHasChanged)}}>ADD MONEY</button></p>} {/* !!!!!!!!! */}
+            <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer(player); setPlayerHasChanged(!playerHasChanged)}}>ADD MONEY</button></p> {/* !!!!!!!!! */}
             {/* {player && <p>Money: {player.getMoney()} <button onClick={()=>{player.changeMoney(100); setPlayer({...player})}}>ADD MONEY</button></p>} */}
             {/* make these a spearate component */}
             {/* <div> 

@@ -11,7 +11,7 @@ interface Props {
     player :Player
     setPlayer :(player :Player) => void
     activity :string
-    giveAnimalItem? :(item :Item) => void
+    giveAnimalItem? :(item :Item, itemIndex: number) => void
     playerHasChanged :boolean
     setPlayerHasChanged :(boolean :boolean) => void
 }
@@ -39,7 +39,7 @@ const ItemList = ({items, player, setPlayer, activity, giveAnimalItem, playerHas
                     <p>Price: {item.getTotalPrice()}</p>
                     {/* would be cleaner to move these to spearate component... */}
                     {activity.slice(0, 3) === "buy" && <button onClick={() => handleBuyItem(item)}>BUY</button>}
-                    {giveAnimalItem && <button onClick={() => giveAnimalItem(item)}>{activity.toUpperCase()}</button>}
+                    {giveAnimalItem && <button onClick={() => giveAnimalItem(item, index)}>{activity.toUpperCase()}</button>}
                 </div>
             )
         })

@@ -46,7 +46,7 @@ const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModal
     return (
         <div>
             {/* {console.log("player", player)} */}
-            {player !== null && <div>   {/* !!!!!!!!! */}
+            <div>
                 <h2>Player Info</h2>
 
                 {/* <p>Name: {(player !== null) ? player.getName() : null}</p>
@@ -57,7 +57,7 @@ const PlayerHomePage = ({player, animalDetailsModalIsOpen, setAnimalDetailsModal
                 <p>Player Level: {player.getLevel()}</p>
                 <p>Player EXP: {player.getCurrentExp()} / 100</p>
                 {displayPlayerAnimals()}
-            </div>}
+            </div>
             {selectedAnimal && <AnimalDetailsModal 
                 animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
                 setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}

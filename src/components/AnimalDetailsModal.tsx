@@ -39,7 +39,7 @@ const AnimalDetailsModal = ({
     }
     
     const handleAdoptAnimal = (animal :Animal) :void => {
-        if(player && setPlayer && animalsForAdoption && setAnimalsForAdoption){ //!!!!!!!!!!
+        if(player && setPlayer && animalsForAdoption && setAnimalsForAdoption){
             let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => animalforAdoption.getName() !== animal.getName()) 
             setAnimalsForAdoption(remainingAnimals)
             player.addAnimal(animal)

@@ -53,16 +53,16 @@ const AnimalPage = ({
         setItems(player.getToys())
     }
 
-    const giveAnimalItem = (item :Item) :void => {
+    const giveAnimalItem = (item :Item, itemIndex :number) :void => {
         if(item instanceof Food) {
             animalToVisit?.eat(item)
-            player.removeFood(item)
+            player.removeFoodByIndex(itemIndex)
             handleClickFeed()
         }
         if(item instanceof Toy) {
             animalToVisit?.play(item)
             player.addExp(item.getTotalExpAdded())
-            player.removeToy(item)
+            player.removeToyByIndex(itemIndex)
             handleClickPlay()
         }
         setPlayer(player)
