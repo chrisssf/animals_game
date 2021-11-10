@@ -13,7 +13,7 @@ class Player extends Character{
     constructor(name: string){
         super(name)
         this.animals = []
-        this.money = 0
+        this.money = 30
         this.foods = []
         this.toys = []
     }
@@ -37,7 +37,7 @@ class Player extends Character{
     public buyItem = (item :Item) :boolean => {
         if(this.money >= item.getTotalPrice()){
             if(item instanceof Food) this.addFood(item)
-            if(item instanceof Toy) this.addToys(item)
+            if(item instanceof Toy) this.addToy(item)
             this.changeMoney(- item.getTotalPrice())
             return true
         }
@@ -68,7 +68,7 @@ class Player extends Character{
         return this.toys
     }
 
-    public addToys = (toy :Toy) :void => {
+    public addToy = (toy :Toy) :void => {
         this.toys.push(toy)
     }
 

@@ -23,9 +23,9 @@ abstract class Character {
 
     public addExp = (exp: number):void => {
         let newTotalExp = this.currentExp + exp
-        if(newTotalExp >= 100){
+        if(newTotalExp >= 100 * this.level){
             this.level += 1
-            this.currentExp = newTotalExp - 100
+            this.currentExp = newTotalExp - (100 * (this.level - 1))
         } else {
             this.currentExp = newTotalExp
         }

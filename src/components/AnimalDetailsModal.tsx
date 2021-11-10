@@ -49,6 +49,8 @@ const AnimalDetailsModal = ({
             let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => animalforAdoption.getName() !== animal.getName()) 
             setAnimalsForAdoption(remainingAnimals)
             player.addAnimal(animal)
+            player.addFood(animal.getFavouriteFood())
+            player.addToy(animal.getFavouriteToy())
             setPlayer(player)
             // setPlayer({...player})
         }

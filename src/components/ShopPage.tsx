@@ -25,21 +25,31 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
         toysForSale.push(football)
         toysForSale.push(rubberDuck)
 
-        foodForSale.push(mouse)
-        foodForSale.push(blueberries)
+        foodForSale.push(pizza)
+        foodForSale.push(strawberries)
         foodForSale.push(salmon)
         foodForSale.push(burger)
         foodForSale.push(burger2)
+        foodForSale.push(pizza2)
+        foodForSale.push(pasta2)
+        foodForSale.push(pasta)
+        foodForSale.push(banana)
 
         setToysForSale([...toysForSale])
         setFoodForSale([...foodForSale])
     }, [])
 
-    let mouse = new Food("Mouse", "Meat", 20, 1, 10)
-    let blueberries = new Food("Blueberries", "Berry", 5, 1, 2)
+    let pizza = new Food("Pizza", "Italian", 20, 1, 10)
+    let strawberries = new Food("Strawberries", "Fruit", 5, 1, 2)
     let salmon = new Food("Salmon", "Fish", 8, 2, 5)
     let burger = new Food("Burger", "Meat", 10, 1, 10)
     let burger2 = new Food("Burger", "Meat", 10, 2, 10)
+    let banana = new Food("Banana", "Fruit", 12, 1, 8)
+    let pasta = new Food("Pasta", "Italian", 16, 1, 14)
+    let pasta2 = new Food("Pasta", "Italian", 16, 2, 14)
+    let pizza2 = new Food("Pizza", "Italian", 20, 3, 10)
+
+
 
     let teddy = new Toy("Teddy", "Cuddly Toy", 7, 1, 3)
     let football = new Toy("Football", "Ball", 15, 1, 10)

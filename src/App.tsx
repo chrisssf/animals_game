@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Animal Game</h2>
+        <h2>Adopt'emAll</h2>
         {player.getName() === "" && <StartPage 
           player={player} 
           setPlayer={setPlayer}

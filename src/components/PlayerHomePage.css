@@ -3,6 +3,9 @@
     margin: 10px;
     padding-bottom: 20px;
 }
+.player-info-container > h2 {
+    margin: 5px 0px 0px 0px;
+}
 
 .player-info-information {
     display: flex;

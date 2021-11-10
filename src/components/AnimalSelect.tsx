@@ -30,8 +30,8 @@ const AnimalSelect = ({
     setDisplayedPages
 }:Props) => {
 
-    let mouse = new Food("Mouse", "Meat", 20, 1, 10)
-    let blueberries = new Food("Blueberries", "Berry", 5, 1, 2)
+    let pizza = new Food("Pizza", "Meat", 20, 1, 10)
+    let strawberries = new Food("Strawberries", "Fruit", 5, 1, 2)
     let salmon = new Food("Salmon", "Fish", 8, 2, 5)
     let burger = new Food("Burger", "Meat", 10, 1, 10)
     let burger2 = new Food("Burger", "Meat", 10, 2, 10)
@@ -45,7 +45,7 @@ const AnimalSelect = ({
     let pounce = new Attack("Pounce", "Stealth", 10, "Incapacitate", 30)
 
 
-    let steve = new Snake("Steve", "Snake", 50, 10, mouse, teddy, [bite])
+    let steve = new Snake("Steve", "Snake", 50, 10, pizza, teddy, [bite])
     let bob = new Bear("Bob", "Bear", 50, 10, salmon, football, [claw])
     let tina = new Tiger("Tina", "Tiger", 50, 10, burger, rubberDuck, [pounce])
     // console.log(steve);

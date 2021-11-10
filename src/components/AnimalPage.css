@@ -1,0 +1,146 @@
+.animal-visit-container  {
+    border: 1px solid black;
+    margin-bottom: 200px;
+}
+
+.animal-visit-container > button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.animal-visit-animal-info-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0px 70px;
+}
+
+.animal-visit-container > h3 {
+    margin-bottom: 0px;
+}
+
+.animal-visit-animal-info-container > p > b {
+    padding-right: 15px;
+}
+
+.animal-visit-img-container{
+    border: 1px solid black;
+    /* background-image: url('../assets/kitchen.png'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 800px;
+    height: 500px;
+    margin: 0 auto 0 auto;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* .animal-visit-img-container > img { */
+.animal-visit-animal-img {
+    width: 300px;
+}
+
+.animal-visit-item-img {
+    width: 100px;
+    position: absolute;
+    visibility: hidden;
+    animation: giveItem 2s ease-in infinite;
+}
+
+@keyframes giveItem {
+    0% {
+        bottom: 0px;
+        visibility: visible;
+    }
+    80% {
+        background-image: none;
+        padding: 50px
+    }
+    90% {
+        padding: 50px;
+        background-image: url('../assets/sparks3.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    99% {
+        padding: 50px;
+        background-image: url('../assets/sparks3.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        bottom: 150px;
+    }
+}
+
+.animal-visit-toy-img {
+    width: 100px;
+    position: absolute;
+    /* visibility: hidden; */
+    /* display: none; */
+    animation: giveToy 4s ease-in 1;
+}
+/* WORKS!!!
+@keyframes giveToy {
+    0% {
+        left: 0px;
+        visibility: visible;
+    }
+    100% {
+        left: 100%;
+        transform: rotate(360deg);
+    }
+} */
+
+/* works better!!! */
+@keyframes giveToy {
+    0% {
+        left: 0px;
+        /* visibility: visible; */
+        display: inline;
+    }
+    30% {
+        left: 60%;
+        transform: rotate(180deg);
+    }
+    40% {
+        left: 40%;
+        transform: rotate(0deg);
+    }
+    50%{
+        left: 60%;
+        transform: rotate(180deg);
+    }
+    60% {
+        left: 40%;
+        transform: rotate(0deg);
+    }
+    100% {
+        left: 100%;
+        transform: rotate(360deg);
+    }
+}
+
+.animal-visit-item-img-spark {
+    background-image: url('../assets/sparks3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.visit-kitchen {
+    background-image: url('../assets/kitchen.png');
+
+}
+
+.visit-bedroom {
+    background-image: url('../assets/bedroom.png');
+    /* background-image: url('../assets/bedroom2.jpg'); */
+}
+
+.visit-garden {
+    background-image: url('../assets/garden1.png');
+    
+}
+

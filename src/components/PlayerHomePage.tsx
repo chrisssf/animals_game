@@ -95,17 +95,16 @@ const PlayerHomePage = ({
 
     return (
         <div>
+            <button onClick={() => handleClickMyAnimals()}>My Animals ({player.getAnimals().length})</button>
+            <button onClick={() => handleClickMyItems()}>My Items</button>
+            <button onClick={() => handleClickShop()}>Shop</button>
+            <button onClick={() => handleClickAdoptAnimal()}>Adopt Animal ({getNumberOfAdoptionsAvailable()})</button>
             <div className="player-info-container">
                 <h2>Player Info</h2>
-                <button onClick={() => handleClickMyAnimals()}>My Animals ({player.getAnimals().length})</button>
-                <button onClick={() => handleClickMyItems()}>My Items</button>
-                <button onClick={() => handleClickShop()}>Shop</button>
-                <button onClick={() => handleClickAdoptAnimal()}>Adopt Animal ({getNumberOfAdoptionsAvailable()})</button>
-                
                 <div className="player-info-information">
                     <p><b>Player Name:</b> {player.getName()}</p>
                     <p><b>Player Level:</b> {player.getLevel()}</p>
-                    <p><b>Player EXP:</b> {player.getCurrentExp()} / 100</p>
+                    <p><b>Player EXP:</b> {player.getCurrentExp()} / {player.getLevel() * 100}</p>
                 </div>
             </div>
             {displayedPages.includes("MyAnimals") && <div>
