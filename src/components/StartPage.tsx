@@ -15,7 +15,6 @@ const StartPage = ({player, setPlayer, setDisplayedPages}: Props) => {
     const handleStartGame = ():void => {
         if (playerName !== ""){
             const newPlayer = new Player(playerName)
-            // const PlayerObject = {...newPlayer}
             setPlayer(newPlayer)
             setDisplayedPages(["AnimalSelect"])
         } else {

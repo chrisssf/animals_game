@@ -35,7 +35,6 @@ const ItemList = ({
             alert("Item Bought!")
             setPlayer(player)
             setPlayerHasChanged(!playerHasChanged)
-            // setPlayer({...player})
         }
         else alert("not enough money!")
     }

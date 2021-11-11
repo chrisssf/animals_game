@@ -39,6 +39,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
         setFoodForSale([...foodForSale])
     }, [])
 
+    //  move to seeds!!!!!!!!!!!!!!!!!!!!!!!!!!!
     let pizza = new Food("Pizza", 1, 20, 10)
     let strawberries = new Food("Strawberries", 1, 5, 2)
     let salmon = new Food("Salmon", 2, 8, 6)

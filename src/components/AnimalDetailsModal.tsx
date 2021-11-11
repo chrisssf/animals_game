@@ -10,15 +10,12 @@ interface Props {
     setSelectedAnimal :(animal :Animal | null ) => void
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
-    player? :Player
-    setPlayer? :(player :Player) => void
-    animalsForAdoption? :Animal[] 
-    setAnimalsForAdoption? :(animals :Animal[]) => void
-    // animalToVisit? :Animal | null
-    // setAnimalToVisit? :(animal :Animal | null) => void
+    player :Player
+    setPlayer :(player :Player) => void
+    animalsForAdoption :Animal[] 
+    setAnimalsForAdoption :(animals :Animal[]) => void
     displayedPages :string[]
     setDisplayedPages :(pages :string[]) => void
-    handleVisitAnimal? :(animal :Animal) => void
 }
 
 const AnimalDetailsModal = ({ 
@@ -30,11 +27,8 @@ const AnimalDetailsModal = ({
     setPlayer,
     animalsForAdoption,
     setAnimalsForAdoption,
-    // animalToVisit,
-    // setAnimalToVisit,
     displayedPages,
     setDisplayedPages,
-    handleVisitAnimal,
 }:Props) => {
 
     const [ talk, setTalk ] = useState<boolean>(false)
@@ -45,18 +39,23 @@ const AnimalDetailsModal = ({
     }
     
     const handleAdoptAnimal = (animal :Animal) :void => {
-        if(player && setPlayer && animalsForAdoption && setAnimalsForAdoption){
-            let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => animalforAdoption.getName() !== animal.getName()) 
-            setAnimalsForAdoption(remainingAnimals)
-            player.addAnimal(animal)
-            player.addFood(animal.getFavouriteFood())
-            player.addToy(animal.getFavouriteToy())
-            setPlayer(player)
-            // setPlayer({...player})
-        }
+
+        let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => animalforAdoption.getName() !== animal.getName()) 
+        setAnimalsForAdoption(remainingAnimals)
+        player.addAnimal(animal)
+        player.addFood(animal.getFavouriteFood())
+        player.addToy(animal.getFavouriteToy())
+        setPlayer(player)
+
         setSelectedAnimal(null)
         setDisplayedPages(["MyAnimals"])
         handleCloseModal()
+    }
+
+    const handleVisitAnimal = (animal :Animal) :void => {
+        setSelectedAnimal(animal)
+        setDisplayedPages(["AnimalPage"])
+        setAnimalDetailsModalIsOpen(false)
     }
 
     const speechBubble = () :JSX.Element => {
@@ -71,8 +70,7 @@ const AnimalDetailsModal = ({
     }
 
     const disableAdoptButton = () :boolean => {
-        if(player) return player.getLevel() <= player.getAnimals().length
-        return false
+        return player.getLevel() <= player.getAnimals().length
     }
 
     const handleTalk = () :void => {
@@ -80,6 +78,14 @@ const AnimalDetailsModal = ({
         setTimeout(() => {
             setTalk(false)
         }, 1000)
+    }
+
+    const checkAnimalIsAdopted = () :boolean => {
+        let animalIsAdopted = false
+        player.getAnimals().forEach(adoptedAnimal => {
+            if(adoptedAnimal.getName() === animal?.getName()) animalIsAdopted = true
+        })
+        return animalIsAdopted
     }
 
     return(
@@ -97,8 +103,8 @@ const AnimalDetailsModal = ({
                 <p>Health: {animal?.getHealth()}</p>
                 <p>Attack: {animal?.getAttack()}</p>
                 {/* <p>{animal.()}</p>attacks = attacks */}
-                {animalsForAdoption && <button disabled={disableAdoptButton()} onClick={() => handleAdoptAnimal(animal)}>ADOPT</button>}
-                {handleVisitAnimal && <button onClick={() => handleVisitAnimal(animal)}>VISIT</button>}
+                {!checkAnimalIsAdopted() && <button disabled={disableAdoptButton()} onClick={() => handleAdoptAnimal(animal)}>ADOPT</button>}
+                {checkAnimalIsAdopted() && <button onClick={() => handleVisitAnimal(animal)}>VISIT</button>}
                 <button onClick={() => handleCloseModal()}>BACK</button>
                 {talk && speechBubble()}
             </div>}

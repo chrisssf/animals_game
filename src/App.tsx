@@ -6,24 +6,22 @@ import PlayerHomePage from './components/PlayerHomePage';
 import AnimalSelect from './components/AnimalSelect';
 import AnimalPage from './components/AnimalPage'
 import ShopPage from './components/ShopPage';
+import AnimalDetailsModal from './components/AnimalDetailsModal';
+import allAnimals from './SeedData'
 
 import Animal from './models/Animal';
 import Player from './models/Player';
 
 function App() {
 
-  // let testPlayer = new Player("test")
-  // console.log("test", Object.keys(testPlayer))
-  // console.log("typeof testPlayer", typeof testPlayer)
   const placeholder = new Player("")
   const [ player, setPlayer ] = useState<Player>(placeholder)
   const [ playerHasChanged, setPlayerHasChanged ] = useState<boolean>(false)
   const [ animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen ] = useState<boolean>(false)
-  const [ animalToVisit, setAnimalToVisit ] = useState<Animal | null>(null)
-  const [ animalToVisitHasChanged, setAnimalToVisitHasChanged ] = useState<boolean>(false)
   const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
   const [ selectedAnimalHasChanged, setSelectedAnimalHasChanged ] = useState<boolean>(false)
   const [ displayedPages, setDisplayedPages ] = useState<string[]>([])
+  const [ animalsForAdoption, setAnimalsForAdoption ] = useState<Animal[]>(allAnimals.allAnimals)
 
   return (
     <div className="App">
@@ -38,8 +36,6 @@ function App() {
           player={player}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-          // animalToVisit={animalToVisit}
-          // setAnimalToVisit={setAnimalToVisit}
           selectedAnimal={selectedAnimal}
           setSelectedAnimal={setSelectedAnimal}
           displayedPages={displayedPages}
@@ -48,6 +44,8 @@ function App() {
         <AnimalSelect 
           player={player} 
           setPlayer={setPlayer}
+          setSelectedAnimal={setSelectedAnimal}
+          animalsForAdoption={animalsForAdoption}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
           displayedPages={displayedPages}
@@ -56,10 +54,6 @@ function App() {
         <AnimalPage
           player={player}
           setPlayer={setPlayer}
-          // animalToVisit={selectedAnimal}
-          // setAnimalToVisit={setSelectedAnimal}
-          // animalToVisitHasChanged={selectedAnimalHasChanged}
-          // setAnimalToVisitHasChanged={setSelectedAnimalHasChanged}
           selectedAnimal={selectedAnimal}
           setSelectedAnimal={setSelectedAnimal}
           selectedAnimalHasChanged={selectedAnimalHasChanged}
@@ -77,6 +71,18 @@ function App() {
           displayedPages={displayedPages}
           setDisplayedPages={setDisplayedPages}
         />}
+        <AnimalDetailsModal 
+          animal={selectedAnimal}
+          setSelectedAnimal={setSelectedAnimal}
+          animalDetailsModalIsOpen={animalDetailsModalIsOpen}
+          setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
+          player={player}
+          setPlayer={setPlayer}
+          displayedPages={displayedPages}
+          setDisplayedPages={setDisplayedPages}
+          animalsForAdoption={animalsForAdoption}
+          setAnimalsForAdoption={setAnimalsForAdoption}
+        />
       </header>
     </div>
   );

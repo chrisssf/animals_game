@@ -12,10 +12,6 @@ import Activity from '../models/Activity';
 interface Props {
     player :Player
     setPlayer :(player :Player) => void
-    // animalToVisit :Animal | null
-    // setAnimalToVisit :(animal :Animal | null) => void
-    // animalToVisitHasChanged :boolean 
-    // setAnimalToVisitHasChanged  :(boolean :boolean) => void
     selectedAnimal :Animal | null
     setSelectedAnimal :(animal :Animal | null) => void
     selectedAnimalHasChanged :boolean 
@@ -29,10 +25,6 @@ interface Props {
 const AnimalPage = ({
     player,
     setPlayer,
-    // animalToVisit, 
-    // setAnimalToVisit, 
-    // animalToVisitHasChanged, 
-    // setAnimalToVisitHasChanged,
     selectedAnimal,
     setSelectedAnimal,
     selectedAnimalHasChanged,
@@ -51,6 +43,7 @@ const AnimalPage = ({
     const [ itemAnimationClass, setItemAnimationClass ] = useState<string>("")
     const [ buttonsDisabled, setButtonsDisabled ] = useState<boolean>(false)
 
+    // move to seeds !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     const cuddle = new Activity("Cuddle", 50, 30)
     const pet = new Activity("Pet", 15, 5)
     const nap = new Activity("Nap With", 60, 60)
@@ -141,9 +134,6 @@ const AnimalPage = ({
         }
         setPlayer(player)
         setPlayerHasChanged(!playerHasChanged)
-        // setPlayer({...player})
-        // setAnimalToVisit(animalToVisit)
-        // setAnimalToVisitHasChanged(!animalToVisitHasChanged)
         setSelectedAnimal(selectedAnimal)
         setSelectedAnimalHasChanged(!selectedAnimalHasChanged)
     }
@@ -189,44 +179,8 @@ const AnimalPage = ({
                     />}
                 </div>}
             </>}
-            {/* {selectedAnimal && <AnimalDetailsModal 
-                animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
-                setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-                animal={selectedAnimal}
-                setSelectedAnimal={setSelectedAnimal}
-                animalToVisit={animalToVisit}
-                setAnimalToVisit={setAnimalToVisit}
-                displayedPages={displayedPages}
-                setDisplayedPages={setDisplayedPages}
-                handleVisitAnimal={handleVisitAnimal}
-            />} */}
-            {/* {activity !== "" && <ItemList 
-                items={items}
-                player={player}
-                setPlayer={setPlayer}
-                activity={activity}
-                giveAnimalItem={giveAnimalItem}
-                playerHasChanged={playerHasChanged}
-                setPlayerHasChanged={setPlayerHasChanged}
-            />} */}
         </div>
     )
 }
 
 export default AnimalPage
-
-// interface Props {
-//     animal :Animal | null
-//     setSelectedAnimal :(animal :Animal | null ) => void
-//     animalDetailsModalIsOpen :boolean
-//     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
-//     player? :Player
-//     setPlayer? :(player :Player) => void
-//     animalsForAdoption? :Animal[] 
-//     setAnimalsForAdoption? :(animals :Animal[]) => void
-//     animalToVisit? :Animal | null
-//     setAnimalToVisit? :(animal :Animal | null) => void
-//     displayedPages :string[]
-//     setDisplayedPages :(pages :string[]) => void
-//     handleVisitAnimal? :(animal :Animal) => void
-// }

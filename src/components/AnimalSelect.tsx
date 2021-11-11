@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './AnimalSelect.css'
 
-import AnimalDetailsModal from './AnimalDetailsModal';
-
 import Player from '../models/Player';
 import Animal from '../models/Animal';
-import Snake from '../models/Snake';
-import Bear from '../models/Bear';
-import Tiger from '../models/Tiger';
-import Food from '../models/Food';
-import Toy from '../models/Toy';
-import Attack from '../models/Attack';
+
 
 interface Props {
     player :Player
     setPlayer :(player :Player) => void
+    setSelectedAnimal :(animal :Animal) => void
+    animalsForAdoption :Animal[]
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
     displayedPages :string[]
@@ -23,47 +18,14 @@ interface Props {
 
 const AnimalSelect = ({
     player, 
-    setPlayer, 
+    setPlayer,
+    setSelectedAnimal,
+    animalsForAdoption,
     animalDetailsModalIsOpen, 
     setAnimalDetailsModalIsOpen,
     displayedPages,
     setDisplayedPages
 }:Props) => {
-
-    let pizza = new Food("Pizza", 1, 20, 10)
-    let strawberries = new Food("Strawberries", 1, 5, 2)
-    let salmon = new Food("Salmon", 2, 8, 6)
-    let burger = new Food("Burger", 1, 10, 10)
-    let burger2 = new Food("Burger", 2, 10, 10)
-
-    let teddy = new Toy("Teddy", 1, 7, 4)
-    let football = new Toy("Football", 1, 15, 10)
-    let rubberDuck = new Toy("Rubber Duck", 1, 10, 6)
-
-    let bite = new Attack("Bite", "Speed", 15, "Poision", 20)
-    let claw = new Attack("Claw", "Power", 25, "Bleeding", 10)
-    let pounce = new Attack("Pounce", "Stealth", 10, "Incapacitate", 30)
-
-
-    let steve = new Snake("Steve", "Snake", 50, 10, pizza, teddy, [bite])
-    let bob = new Bear("Bob", "Bear", 50, 10, salmon, football, [claw])
-    let tina = new Tiger("Tina", "Tiger", 50, 10, burger, rubberDuck, [pounce])
-    // console.log(steve);
-    // let animals :Animal[] = []
-    // animals.push(steve)
-    // animals.push(bob)
-    // animals.push(tina)
-    // console.log(animals)
-
-    const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
-    const [ animalsForAdoption , setAnimalsForAdoption ] = useState<Animal[]>([])
-
-    useEffect(() => {
-        animalsForAdoption.push(steve)
-        animalsForAdoption.push(bob)
-        animalsForAdoption.push(tina)
-        setAnimalsForAdoption([...animalsForAdoption])
-    }, [])
 
     const getNumberOfAdoptionsAvailable = () :number => {
         return player.getLevel() - player.getAnimals().length
@@ -99,19 +61,6 @@ const AnimalSelect = ({
                 <p>A new animal can be adopted every time your Player Level increases!</p>
                 <p>You have {getNumberOfAdoptionsAvailable()} adoptions available</p>
                 {displayAnimals()}
-                
-                <AnimalDetailsModal 
-                    animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
-                    setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-                    animal={selectedAnimal}
-                    setSelectedAnimal={setSelectedAnimal}
-                    player={player}
-                    setPlayer={setPlayer}
-                    animalsForAdoption={animalsForAdoption} 
-                    setAnimalsForAdoption={setAnimalsForAdoption}
-                    displayedPages={displayedPages}
-                    setDisplayedPages={setDisplayedPages}
-                />
             </div>}
         </div>
     )

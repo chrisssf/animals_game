@@ -3,15 +3,11 @@ import './PlayerHomePage.css'
 
 import Player from '../models/Player';
 import Animal from '../models/Animal'
-import AnimalDetailsModal from './AnimalDetailsModal'
-
 
 interface Props {
     player :Player
     animalDetailsModalIsOpen :boolean
     setAnimalDetailsModalIsOpen :(boolean :boolean) => void
-    // animalToVisit :Animal | null
-    // setAnimalToVisit :(animal :Animal | null) => void
     selectedAnimal :Animal | null
     setSelectedAnimal :(animal :Animal | null) => void
     displayedPages :string[]
@@ -22,17 +18,11 @@ const PlayerHomePage = ({
     player, 
     animalDetailsModalIsOpen, 
     setAnimalDetailsModalIsOpen, 
-    // animalToVisit, 
-    // setAnimalToVisit,
     selectedAnimal,
     setSelectedAnimal,
     displayedPages,
     setDisplayedPages,
 }: Props) =>{
-    // will have some player details and list of current animals
-    // every level / (few levels?) player can get new animal added to their collection
-
-    // const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
 
     const handleClickMyAnimals = () :void => {
         setDisplayedPages(["MyAnimals"])
@@ -82,18 +72,12 @@ const PlayerHomePage = ({
 
     const handleClickAnimal = (animal :Animal) :void => {
         setSelectedAnimal(animal)
-        // setAnimalToVisit(animal)
-
         setAnimalDetailsModalIsOpen(true)
     }
 
     const handleVisitAnimal = (animal :Animal) :void => {
-        // setAnimalToVisit(animal)
         setSelectedAnimal(animal)
         setDisplayedPages(["AnimalPage"])
-        // handleCloseModal()
-        // setSelectedAnimal(null)
-        setAnimalDetailsModalIsOpen(false)
     }
 
     const getNumberOfAdoptionsAvailable = () :number => {
@@ -119,18 +103,6 @@ const PlayerHomePage = ({
                 {displayHelpMessage()}
                 {displayPlayerAnimals()}
             </div>}
-            {selectedAnimal && <AnimalDetailsModal 
-                animalDetailsModalIsOpen={animalDetailsModalIsOpen} 
-                setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-                // animal={selectedAnimal}
-                animal={selectedAnimal}
-                setSelectedAnimal={setSelectedAnimal}
-                // animalToVisit={animalToVisit}
-                // setAnimalToVisit={setAnimalToVisit}
-                displayedPages={displayedPages}
-                setDisplayedPages={setDisplayedPages}
-                handleVisitAnimal={handleVisitAnimal}
-            />}
         </div>)
 
 }
