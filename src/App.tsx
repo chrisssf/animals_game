@@ -21,6 +21,8 @@ function App() {
   const [ animalDetailsModalIsOpen, setAnimalDetailsModalIsOpen ] = useState<boolean>(false)
   const [ animalToVisit, setAnimalToVisit ] = useState<Animal | null>(null)
   const [ animalToVisitHasChanged, setAnimalToVisitHasChanged ] = useState<boolean>(false)
+  const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
+  const [ selectedAnimalHasChanged, setSelectedAnimalHasChanged ] = useState<boolean>(false)
   const [ displayedPages, setDisplayedPages ] = useState<string[]>([])
 
   return (
@@ -36,8 +38,10 @@ function App() {
           player={player}
           animalDetailsModalIsOpen={animalDetailsModalIsOpen}
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
-          animalToVisit={animalToVisit}
-          setAnimalToVisit={setAnimalToVisit}
+          // animalToVisit={animalToVisit}
+          // setAnimalToVisit={setAnimalToVisit}
+          selectedAnimal={selectedAnimal}
+          setSelectedAnimal={setSelectedAnimal}
           displayedPages={displayedPages}
           setDisplayedPages={setDisplayedPages}
         />}
@@ -52,10 +56,14 @@ function App() {
         <AnimalPage
           player={player}
           setPlayer={setPlayer}
-          animalToVisit={animalToVisit}
-          setAnimalToVisit={setAnimalToVisit}
-          animalToVisitHasChanged={animalToVisitHasChanged}
-          setAnimalToVisitHasChanged={setAnimalToVisitHasChanged}
+          // animalToVisit={selectedAnimal}
+          // setAnimalToVisit={setSelectedAnimal}
+          // animalToVisitHasChanged={selectedAnimalHasChanged}
+          // setAnimalToVisitHasChanged={setSelectedAnimalHasChanged}
+          selectedAnimal={selectedAnimal}
+          setSelectedAnimal={setSelectedAnimal}
+          selectedAnimalHasChanged={selectedAnimalHasChanged}
+          setSelectedAnimalHasChanged={setSelectedAnimalHasChanged}
           playerHasChanged={playerHasChanged}
           setPlayerHasChanged={setPlayerHasChanged}
           displayedPages={displayedPages}

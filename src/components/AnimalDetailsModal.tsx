@@ -14,8 +14,8 @@ interface Props {
     setPlayer? :(player :Player) => void
     animalsForAdoption? :Animal[] 
     setAnimalsForAdoption? :(animals :Animal[]) => void
-    animalToVisit? :Animal | null
-    setAnimalToVisit? :(animal :Animal | null) => void
+    // animalToVisit? :Animal | null
+    // setAnimalToVisit? :(animal :Animal | null) => void
     displayedPages :string[]
     setDisplayedPages :(pages :string[]) => void
     handleVisitAnimal? :(animal :Animal) => void
@@ -30,8 +30,8 @@ const AnimalDetailsModal = ({
     setPlayer,
     animalsForAdoption,
     setAnimalsForAdoption,
-    animalToVisit,
-    setAnimalToVisit,
+    // animalToVisit,
+    // setAnimalToVisit,
     displayedPages,
     setDisplayedPages,
     handleVisitAnimal,

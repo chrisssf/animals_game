@@ -44,11 +44,11 @@ const ItemList = ({
         let secondsRemaining :number = Math.floor(activity.getCooldownRemaining())
         if (secondsRemaining < 0) return
         if (secondsRemaining === 0) {
-            document.getElementById("thing" + index)!.innerText = "LOVE"
+            // document.getElementById("thing" + index)!.innerText = "LOVE" NEED THIS BACK!!!!!!!!!!!!!!!!!!!!!
             return
         }
         // if(document.getElementById("thing" + index) !== null) document.getElementById("thing" + index).innerText = secondsRemaining.toString()
-        document.getElementById("thing" + index)!.innerText = "Wait " + secondsRemaining.toString() + "s"
+        // document.getElementById("thing" + index)!.innerText = "Wait " + secondsRemaining.toString() + "s" NEED THIS BACK!!!!!!!!!!!!!!!!!!!!!
         setTimeout(()=> {
             displayRemainingCooldown(activity, index)
         }, 1000)

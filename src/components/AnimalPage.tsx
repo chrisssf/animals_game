@@ -12,10 +12,14 @@ import Activity from '../models/Activity';
 interface Props {
     player :Player
     setPlayer :(player :Player) => void
-    animalToVisit :Animal | null
-    setAnimalToVisit :(animal :Animal | null) => void
-    animalToVisitHasChanged :boolean 
-    setAnimalToVisitHasChanged  :(boolean :boolean) => void
+    // animalToVisit :Animal | null
+    // setAnimalToVisit :(animal :Animal | null) => void
+    // animalToVisitHasChanged :boolean 
+    // setAnimalToVisitHasChanged  :(boolean :boolean) => void
+    selectedAnimal :Animal | null
+    setSelectedAnimal :(animal :Animal | null) => void
+    selectedAnimalHasChanged :boolean 
+    setSelectedAnimalHasChanged  :(boolean :boolean) => void
     playerHasChanged :boolean
     setPlayerHasChanged :(boolean :boolean) => void
     displayedPages :string[]
@@ -25,10 +29,14 @@ interface Props {
 const AnimalPage = ({
     player,
     setPlayer,
-    animalToVisit, 
-    setAnimalToVisit, 
-    animalToVisitHasChanged, 
-    setAnimalToVisitHasChanged,
+    // animalToVisit, 
+    // setAnimalToVisit, 
+    // animalToVisitHasChanged, 
+    // setAnimalToVisitHasChanged,
+    selectedAnimal,
+    setSelectedAnimal,
+    selectedAnimalHasChanged,
+    setSelectedAnimalHasChanged,
     playerHasChanged,
     setPlayerHasChanged,
     displayedPages,
@@ -66,13 +74,13 @@ const AnimalPage = ({
     //     setTimeout(()=>{
     //         setItemAnimationClass("")
     //     }, 2000)
-    //     animalToVisit?.addLove(50)
+    //     selectedAnimal?.addLove(50)
     //     player.addLove(50)
     //     setPlayer(player)
     //     setPlayerHasChanged(!playerHasChanged)
     //     // setPlayer({...player})
-    //     setAnimalToVisit(animalToVisit)
-    //     setAnimalToVisitHasChanged(!animalToVisitHasChanged)
+    //     setSelectedAnimal(selectedAnimal)
+    //     setSelectedAnimalHasChanged(!selectedAnimalHasChanged)
     // }
 
     const handleClickFeed = () :void => {
@@ -92,7 +100,7 @@ const AnimalPage = ({
 
     const giveAnimalItem = (item :Item, itemIndex :number) :void => {
         if(item instanceof Food) {
-            animalToVisit?.eat(item)
+            selectedAnimal?.eat(item)
             player.removeFoodByIndex(itemIndex)
             handleClickFeed()
             setItemAnimationClass(item.getName())
@@ -103,7 +111,7 @@ const AnimalPage = ({
             }, 2000)
         }
         if(item instanceof Toy) {
-            animalToVisit?.play(item)
+            selectedAnimal?.play(item)
             player.addLove(item.getTotalLoveAdded())
             player.removeToyByIndex(itemIndex)
             handleClickPlay()
@@ -116,7 +124,7 @@ const AnimalPage = ({
         }
         if(item instanceof Activity) {
             if(item.isOffCooldown()){
-                animalToVisit?.doActivity(item)
+                selectedAnimal?.doActivity(item)
                 player.addLove(item.getTotalLoveAdded())
                 handleClickLove()
                 setItemAnimationClass("Heart")
@@ -134,8 +142,10 @@ const AnimalPage = ({
         setPlayer(player)
         setPlayerHasChanged(!playerHasChanged)
         // setPlayer({...player})
-        setAnimalToVisit(animalToVisit)
-        setAnimalToVisitHasChanged(!animalToVisitHasChanged)
+        // setAnimalToVisit(animalToVisit)
+        // setAnimalToVisitHasChanged(!animalToVisitHasChanged)
+        setSelectedAnimal(selectedAnimal)
+        setSelectedAnimalHasChanged(!selectedAnimalHasChanged)
     }
 
     const handleClickRoom = (room :string) :void => {
@@ -149,14 +159,14 @@ const AnimalPage = ({
         <div>
             {displayedPages.includes("AnimalPage") && <>
                 <h2>Animal Page</h2>
-                {animalToVisit && <div className="animal-visit-container">
-                    {/* <h3>{animalToVisit?.getName()} <button onClick={()=>}>More info</button></h3>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1!!!!!!!!!!!!!!!!!!!!!! */}
+                {selectedAnimal && <div className="animal-visit-container">
+                    {/* <h3>{selectedAnimal?.getName()} <button onClick={()=>}>More info</button></h3>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1!!!!!!!!!!!!!!!!!!!!!! */}
                     <div className="animal-visit-animal-info-container">
-                        <p><b>Love Level:</b> {animalToVisit.getLevel()}</p>
-                        <p><b>Current Love Meter:</b> {animalToVisit.getLoveMeter()} / {animalToVisit.getLevel() * 100}</p>
+                        <p><b>Love Level:</b> {selectedAnimal.getLevel()}</p>
+                        <p><b>Current Love Meter:</b> {selectedAnimal.getLoveMeter()} / {selectedAnimal.getLevel() * 100}</p>
                     </div>
                     <div className={"animal-visit-img-container " + "visit-" + currentRoom}>
-                        <img className="animal-visit-animal-img" alt={animalToVisit?.getType()} src={require('../assets/' + animalToVisit?.getName() + '.png').default}/>
+                        <img className="animal-visit-animal-img" alt={selectedAnimal?.getType()} src={require('../assets/' + selectedAnimal?.getName() + '.png').default}/>
                         {itemAnimationClass !== "" && <img className="animal-visit-item-img" alt="item" src={require('../assets/' + itemAnimationClass + '.png').default}/>}
                         {toyAnimationClass !== "" && <img className="animal-visit-toy-img" alt="toy" src={require('../assets/' + toyAnimationClass + '.png').default}/>}
                     </div>
