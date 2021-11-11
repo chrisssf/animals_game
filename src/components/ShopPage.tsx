@@ -39,21 +39,21 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
         setFoodForSale([...foodForSale])
     }, [])
 
-    let pizza = new Food("Pizza", "Italian", 20, 1, 10)
-    let strawberries = new Food("Strawberries", "Fruit", 5, 1, 2)
-    let salmon = new Food("Salmon", "Fish", 8, 2, 5)
-    let burger = new Food("Burger", "Meat", 10, 1, 10)
-    let burger2 = new Food("Burger", "Meat", 10, 2, 10)
-    let banana = new Food("Banana", "Fruit", 12, 1, 8)
-    let pasta = new Food("Pasta", "Italian", 16, 1, 14)
-    let pasta2 = new Food("Pasta", "Italian", 16, 2, 14)
-    let pizza2 = new Food("Pizza", "Italian", 20, 3, 10)
+    let pizza = new Food("Pizza", 1, 20, 10)
+    let strawberries = new Food("Strawberries", 1, 5, 2)
+    let salmon = new Food("Salmon", 2, 8, 6)
+    let burger = new Food("Burger", 1, 10, 10)
+    let burger2 = new Food("Burger", 2, 10, 10)
+    let banana = new Food("Banana", 1, 12, 8)
+    let pasta = new Food("Pasta", 1, 16, 14)
+    let pasta2 = new Food("Pasta", 2, 16, 14)
+    let pizza2 = new Food("Pizza", 3, 20, 10)
 
 
 
-    let teddy = new Toy("Teddy", "Cuddly Toy", 7, 1, 3)
-    let football = new Toy("Football", "Ball", 15, 1, 10)
-    let rubberDuck = new Toy("Rubber Duck", "Chew Toy", 10, 1, 5)
+    let teddy = new Toy("Teddy", 1, 7, 4)
+    let football = new Toy("Football", 1, 15, 10)
+    let rubberDuck = new Toy("Rubber Duck", 1, 10, 6)
 
     // const handleBuyItem = (item :Toy | Food) :void => { 
     //     if(player.buyItem(item)) {
@@ -87,7 +87,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
     //         return (
     //             <div className="shop-item">
     //                 <p>{toy.getName()}</p>
-    //                 <p>EXP added: {toy.getTotalExpAdded()}</p>
+    //                 <p>Love added: {toy.getTotalLoveAdded()}</p>
     //                 <p>Level: {toy.getLevel()}</p>
     //                 <p>Price: {toy.getTotalPrice()}</p>
     //                 <button onClick={() => handleBuyItem(toy)}>BUY</button>

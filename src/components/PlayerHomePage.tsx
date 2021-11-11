@@ -103,8 +103,8 @@ const PlayerHomePage = ({
                 <h2>Player Info</h2>
                 <div className="player-info-information">
                     <p><b>Player Name:</b> {player.getName()}</p>
-                    <p><b>Player Level:</b> {player.getLevel()}</p>
-                    <p><b>Player EXP:</b> {player.getCurrentExp()} / {player.getLevel() * 100}</p>
+                    <p><b>Player Love Level:</b> {player.getLevel()}</p>
+                    <p><b>Player Love Meter:</b> {player.getLoveMeter()} / {player.getLevel() * 100}</p>
                 </div>
             </div>
             {displayedPages.includes("MyAnimals") && <div>

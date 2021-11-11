@@ -2,6 +2,7 @@ import Toy from './Toy'
 import Food from './Food'
 import Attack from './Attack'
 import Character from './Character'
+import Activity from './Activity'
 
 abstract class Animal extends Character { // wolf eagle tiger bear snake => have 3 of each to choose from!!!
     private type: string
@@ -73,9 +74,18 @@ abstract class Animal extends Character { // wolf eagle tiger bear snake => have
 
     public play = (toy :Toy) :void => {
         let toyLevel :number = toy.getLevel()
-        let expGainedByToy :number = toyLevel * toy.getExpAddedPerLevel()
-        if(toy.getName() === this.favouriteToy.getName()) expGainedByToy *= 1.5
-        this.addExp(expGainedByToy)
+        let loveGainedByToy :number = toyLevel * toy.getLoveAddedPerLevel()
+        if(toy.getName() === this.favouriteToy.getName()) loveGainedByToy *= 1.5
+        this.addLove(loveGainedByToy)
+    }
+
+    public doActivity = (activity :Activity) :void => {
+        if(activity.isOffCooldown()) {
+            let activityLevel = activity.getLevel()
+            let loveGainedByActivity :number = activityLevel * activity.getLoveAddedPerLevel()
+            this.addLove(loveGainedByActivity)
+            activity.startActivity()
+        }
     }
 
     abstract talk() :string

@@ -1,10 +1,10 @@
-import Item from './Item'
+import ShopItem from './ShopItem'
 
-class Food extends Item {
+class Food extends ShopItem {
     private healthAddedPerLevel: number
 
-    constructor(name: string, type: string, healthAddedPerLevel: number, level :number, pricePerLevel :number){
-        super(name, type, level, pricePerLevel)
+    constructor(name: string, level :number, pricePerLevel :number, healthAddedPerLevel: number,){
+        super(name, level, pricePerLevel)
         this.healthAddedPerLevel = healthAddedPerLevel
     }
 

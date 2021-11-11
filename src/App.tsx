@@ -48,8 +48,8 @@ function App() {
           setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
           displayedPages={displayedPages}
           setDisplayedPages={setDisplayedPages}
-        /> {/* } */}
-        {displayedPages.includes("AnimalPage") && <AnimalPage
+        />
+        <AnimalPage
           player={player}
           setPlayer={setPlayer}
           animalToVisit={animalToVisit}
@@ -58,7 +58,9 @@ function App() {
           setAnimalToVisitHasChanged={setAnimalToVisitHasChanged}
           playerHasChanged={playerHasChanged}
           setPlayerHasChanged={setPlayerHasChanged}
-        />}
+          displayedPages={displayedPages}
+          setDisplayedPages={setDisplayedPages}
+        />
         {displayedPages.includes("Shop") && <ShopPage 
           player={player} 
           setPlayer={setPlayer}

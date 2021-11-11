@@ -30,15 +30,15 @@ const AnimalSelect = ({
     setDisplayedPages
 }:Props) => {
 
-    let pizza = new Food("Pizza", "Meat", 20, 1, 10)
-    let strawberries = new Food("Strawberries", "Fruit", 5, 1, 2)
-    let salmon = new Food("Salmon", "Fish", 8, 2, 5)
-    let burger = new Food("Burger", "Meat", 10, 1, 10)
-    let burger2 = new Food("Burger", "Meat", 10, 2, 10)
+    let pizza = new Food("Pizza", 1, 20, 10)
+    let strawberries = new Food("Strawberries", 1, 5, 2)
+    let salmon = new Food("Salmon", 2, 8, 6)
+    let burger = new Food("Burger", 1, 10, 10)
+    let burger2 = new Food("Burger", 2, 10, 10)
 
-    let teddy = new Toy("Teddy", "Cuddly Toy", 7, 1, 3)
-    let football = new Toy("Football", "Ball", 15, 1, 10)
-    let rubberDuck = new Toy("Rubber Duck", "Chew Toy", 10, 1, 5)
+    let teddy = new Toy("Teddy", 1, 7, 4)
+    let football = new Toy("Football", 1, 15, 10)
+    let rubberDuck = new Toy("Rubber Duck", 1, 10, 6)
 
     let bite = new Attack("Bite", "Speed", 15, "Poision", 20)
     let claw = new Attack("Claw", "Power", 25, "Bleeding", 10)

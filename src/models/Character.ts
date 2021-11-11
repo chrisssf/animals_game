@@ -1,33 +1,37 @@
 abstract class Character {
     private name: string
     private level: number
-    private currentExp: number
+    private loveMeter: number
 
     constructor(name :string){
         this.name = name
         this.level = 1
-        this.currentExp = 0
+        this.loveMeter = 0
     }
 
-    public getName = ():string => {
+    public getName() :string  {
         return this.name
     }
 
-    public getLevel = ():number => {
+    public getLevel() :number  {
         return this.level
     }
 
-    public getCurrentExp = ():number => {
-        return this.currentExp
+    public getLoveMeter() :number  {
+        return this.loveMeter
     }
 
-    public addExp = (exp: number):void => {
-        let newTotalExp = this.currentExp + exp
-        if(newTotalExp >= 100 * this.level){
-            this.level += 1
-            this.currentExp = newTotalExp - (100 * (this.level - 1))
+    public addLevel() :void  {
+        this.level += 1
+    }
+
+    public addLove(love: number) :void {
+        let newTotalLove = this.loveMeter + love
+        if(newTotalLove >= 100 * this.level){
+            this.addLevel()
+            this.loveMeter = newTotalLove - (100 * (this.level - 1))
         } else {
-            this.currentExp = newTotalExp
+            this.loveMeter = newTotalLove
         }
     }
 }

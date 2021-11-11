@@ -1,10 +1,10 @@
-import ShopItem from './ShopItem'
+import Item from './Item'
 
-class Toy extends ShopItem {
+abstract class LoveItem extends Item {
     private loveAddedPerLevel: number
 
-    constructor(name: string, level :number, pricePerLevel :number, loveAddedPerLevel: number){
-        super(name, level, pricePerLevel)
+    constructor(name: string, loveAddedPerLevel: number, level :number){
+        super(name, level)
         this.loveAddedPerLevel = loveAddedPerLevel
     }
 
@@ -17,4 +17,4 @@ class Toy extends ShopItem {
     }
 }
 
-export default Toy
+export default LoveItem

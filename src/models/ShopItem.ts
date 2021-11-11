@@ -1,35 +1,23 @@
-abstract class ShopItem {
-    private name: string
-    private type: string
-    private level: number
-    private pricePerLevel: number
+import Item from './Item'
 
-    constructor(name :string, type: string, level :number, pricePerLevel :number){
-        this.name = name
-        this.type = type
-        this.level = level
+// love items / activties ===> pet, cuddle, nap with, brush, wash / clean, 
+
+abstract class ShopItem extends Item {
+    private pricePerLevel :number
+
+    constructor(name: string, level :number, pricePerLevel :number){
+        super(name, level)
         this.pricePerLevel = pricePerLevel
+
     }
 
-    public getName = () :string  => {
-        return this.name
-    }
-
-    public getType = () :string => {
-        return this.type
-    }
-
-    public getLevel = () :number => {
-        return this.level
-    }
-
-    public getPricePerLevel = () :number => {
+    public getPricePerLevel() :number {
         return this.pricePerLevel
     }
 
-    public getTotalPrice = () :number => {
+    public getTotalPrice() :number {
         return (this.pricePerLevel * this.getLevel()) - (this.getLevel() - 1)
     }
 }
 
-    export default ShopItem
+export default ShopItem
