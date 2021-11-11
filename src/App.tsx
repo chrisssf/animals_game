@@ -7,7 +7,7 @@ import AnimalSelect from './components/AnimalSelect';
 import AnimalPage from './components/AnimalPage'
 import ShopPage from './components/ShopPage';
 import AnimalDetailsModal from './components/AnimalDetailsModal';
-import allAnimals from './SeedData'
+import seedData from './SeedData'
 
 import Animal from './models/Animal';
 import Player from './models/Player';
@@ -21,7 +21,7 @@ function App() {
   const [ selectedAnimal, setSelectedAnimal ] = useState<Animal | null>(null)
   const [ selectedAnimalHasChanged, setSelectedAnimalHasChanged ] = useState<boolean>(false)
   const [ displayedPages, setDisplayedPages ] = useState<string[]>([])
-  const [ animalsForAdoption, setAnimalsForAdoption ] = useState<Animal[]>(allAnimals.allAnimals)
+  const [ animalsForAdoption, setAnimalsForAdoption ] = useState<Animal[]>(seedData.allAnimals)
 
   return (
     <div className="App">

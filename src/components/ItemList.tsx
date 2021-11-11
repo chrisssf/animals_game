@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './ItemList.css'
 
 import Player from "../models/Player";
@@ -30,30 +30,32 @@ const ItemList = ({
     buttonsDisabled,
 } :Props) => {
 
-    const handleBuyItem = (item :ShopItem) :void => {
-        if(player.buyItem(item)) {
-            alert("Item Bought!")
-            setPlayer(player)
-            setPlayerHasChanged(!playerHasChanged)
-        }
-        else alert("not enough money!")
-    }
+    const [buttonPressed, setButtonPressed] = useState<boolean>(false)
+    const myRefs :any = useRef([]); // FIX THE ANY!!!!!!!!
 
-    const displayRemainingCooldown = (activity :Activity, index :number) =>{
+    const displayRemainingCooldown = (activity :Activity, index :number) =>{        
         let secondsRemaining :number = Math.floor(activity.getCooldownRemaining())
         if (secondsRemaining < 0) return
         if (secondsRemaining === 0) {
-            // document.getElementById("thing" + index)!.innerText = "LOVE" NEED THIS BACK!!!!!!!!!!!!!!!!!!!!!
+            // document.getElementById("thing" + index)!.innerText = "LOVE" 
+            if(myRefs.current[index]) myRefs.current[index].innerText = "LOVE"
             return
         }
         // if(document.getElementById("thing" + index) !== null) document.getElementById("thing" + index).innerText = secondsRemaining.toString()
-        // document.getElementById("thing" + index)!.innerText = "Wait " + secondsRemaining.toString() + "s" NEED THIS BACK!!!!!!!!!!!!!!!!!!!!!
+        // document.getElementById("thing" + index)!.innerText = "Wait " + secondsRemaining.toString() + "s" 
+        if(myRefs.current[index]) myRefs.current[index].innerText = "Wait " + secondsRemaining.toString() + "s"
         setTimeout(()=> {
             displayRemainingCooldown(activity, index)
         }, 1000)
     }
 
-    
+    useEffect(() => {
+        items.forEach((activity :Item, index :number)=>{
+            if(activity instanceof Activity){
+                displayRemainingCooldown(activity, index)
+            }
+        })
+    },[buttonPressed])
 
     const displayItems = () :JSX.Element => {
         let itemsToDisplay :JSX.Element[] = items.map((item, index) => {
@@ -65,11 +67,10 @@ const ItemList = ({
                     <p>Level: {item.getLevel()}</p>
                     {item instanceof ShopItem && <p>Price: {item.getTotalPrice()}</p>}
                     {item instanceof Activity && <p>Cooldown: {item.getCooldown()}s</p>}
-                    {item instanceof Activity && displayRemainingCooldown(item, index)}
-                    {/* {item instanceof Activity && <p id={"thing" + index}></p>} */}
+                    {/* {item instanceof Activity && <p id={"activity" + index}></p>} */}
                     {/* would be cleaner to move these to spearate component... */}
                     {(item instanceof Toy || item instanceof Food) && activity.slice(0, 3) === "buy" && <button onClick={() => handleBuyItem(item)}>BUY</button>}
-                    {giveAnimalItem && <button id={"thing" + index} disabled={buttonsDisabled} onClick={() => giveAnimalItem(item, index)}>{activity.toUpperCase()}</button>}
+                    {giveAnimalItem && <button ref={(el) => (myRefs.current[index] = el)} id={"thing" + index} disabled={buttonsDisabled} onClick={() => {giveAnimalItem(item, index) ; setButtonPressed(!buttonPressed)}}>{activity.toUpperCase()}</button>}
                 </div>
             )
         })
@@ -78,6 +79,15 @@ const ItemList = ({
                 {itemsToDisplay}
             </div>
         )
+    }
+
+    const handleBuyItem = (item :ShopItem) :void => {
+        if(player.buyItem(item)) {
+            alert("Item Bought!")
+            setPlayer(player)
+            setPlayerHasChanged(!playerHasChanged)
+        }
+        else alert("not enough money!")
     }
 
     return (

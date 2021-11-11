@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AnimalPage.css'
 import ItemList from './ItemList';
+import SeedData from '../SeedData';
 
 import Animal from '../models/Animal';
 import Player from '../models/Player';
@@ -35,32 +36,21 @@ const AnimalPage = ({
     setDisplayedPages,
 } :Props) => {
 
-    const [ activity, setActivity ] = useState<string>("")
-    const [ items, setItems ] = useState<Item[]>([])
-    const [ loveActivities, setLoveActivities ] = useState<Activity[]>([])
+    const [ activity, setActivity ] = useState<string>("love")
+    const [ items, setItems ] = useState<Item[]>(SeedData.activities)
+    // const [ loveActivities, setLoveActivities ] = useState<Activity[]>(SeedData.activities)
     const [ currentRoom, setCurrentRoom] = useState<string>("bedroom")
     const [ toyAnimationClass, setToyAnimationClass ] = useState<string>("")
     const [ itemAnimationClass, setItemAnimationClass ] = useState<string>("")
     const [ buttonsDisabled, setButtonsDisabled ] = useState<boolean>(false)
 
-    // move to seeds !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    const cuddle = new Activity("Cuddle", 50, 30)
-    const pet = new Activity("Pet", 15, 5)
-    const nap = new Activity("Nap With", 60, 60)
-    const wash = new Activity("Wash", 30, 60)
-    const talk = new Activity("Talk", 10, 2)
-
     useEffect(() => {
-        let activities :Activity[] = []
-        activities.push(talk)
-        activities.push(pet)
-        activities.push(cuddle)
-        activities.push(nap)
-        activities.push(wash)
-        setLoveActivities(activities)
-        setItems(activities)
-        setActivity("love")
-    }, [])
+        if(currentRoom !== "bedroom") {
+            setCurrentRoom("bedroom")
+            setItems(SeedData.activities)
+            setActivity("love")
+        }
+    }, [displayedPages])
 
     // const handleGiveLove = () :void => {
     //     setItemAnimationClass("Heart")
@@ -88,7 +78,7 @@ const AnimalPage = ({
 
     const handleClickLove = () :void => {
         setActivity("love")
-        setItems(loveActivities)
+        setItems(SeedData.activities)
     }
 
     const giveAnimalItem = (item :Item, itemIndex :number) :void => {

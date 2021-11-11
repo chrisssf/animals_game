@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ShopPage.css'
+import SeedData from '../SeedData';
 import ItemList from './ItemList'
 
 import Player from '../models/Player';
@@ -15,46 +16,13 @@ interface Props {
     setDisplayedPages :(pages :string[]) => void
 }
 
+// instead of showing player items at bottom could have number owned beside buy button!!!!!!!!!!!!!!
+
 const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, displayedPages, setDisplayedPages} :Props) => {
 
-    const [ toysForSale, setToysForSale ] = useState<Toy[]>([])
-    const [ foodForSale, setFoodForSale ] = useState<Food[]>([])
-
-    useEffect(() => {
-        toysForSale.push(teddy)
-        toysForSale.push(football)
-        toysForSale.push(rubberDuck)
-
-        foodForSale.push(pizza)
-        foodForSale.push(strawberries)
-        foodForSale.push(salmon)
-        foodForSale.push(burger)
-        foodForSale.push(burger2)
-        foodForSale.push(pizza2)
-        foodForSale.push(pasta2)
-        foodForSale.push(pasta)
-        foodForSale.push(banana)
-
-        setToysForSale([...toysForSale])
-        setFoodForSale([...foodForSale])
-    }, [])
-
-    //  move to seeds!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    let pizza = new Food("Pizza", 1, 20, 10)
-    let strawberries = new Food("Strawberries", 1, 5, 2)
-    let salmon = new Food("Salmon", 2, 8, 6)
-    let burger = new Food("Burger", 1, 10, 10)
-    let burger2 = new Food("Burger", 2, 10, 10)
-    let banana = new Food("Banana", 1, 12, 8)
-    let pasta = new Food("Pasta", 1, 16, 14)
-    let pasta2 = new Food("Pasta", 2, 16, 14)
-    let pizza2 = new Food("Pizza", 3, 20, 10)
-
-
-
-    let teddy = new Toy("Teddy", 1, 7, 4)
-    let football = new Toy("Football", 1, 15, 10)
-    let rubberDuck = new Toy("Rubber Duck", 1, 10, 6)
+    const [ toysForSale, setToysForSale ] = useState<Toy[]>(SeedData.toysForSale)
+    const [ foodForSale, setFoodForSale ] = useState<Food[]>(SeedData.foodForSale)
+    
 
     // const handleBuyItem = (item :Toy | Food) :void => { 
     //     if(player.buyItem(item)) {
