@@ -34,19 +34,24 @@ const AnimalDetailsModal = ({
     const [ talk, setTalk ] = useState<boolean>(false)
 
     const handleCloseModal = () :void => {
-        setSelectedAnimal(null)
+        // setSelectedAnimal(null)
         setAnimalDetailsModalIsOpen(false)
+    }
+
+    const removeAnimalByName = (animal :Animal) :Animal[] => {
+        let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => {
+            return animalforAdoption.getName() !== animal.getName()
+        })
+        return remainingAnimals
     }
     
     const handleAdoptAnimal = (animal :Animal) :void => {
-
-        let remainingAnimals :Animal[] = animalsForAdoption.filter(animalforAdoption => animalforAdoption.getName() !== animal.getName()) 
+        let remainingAnimals :Animal[] = removeAnimalByName(animal)
         setAnimalsForAdoption(remainingAnimals)
         player.addAnimal(animal)
         player.addFood(animal.getFavouriteFood())
         player.addToy(animal.getFavouriteToy())
         setPlayer(player)
-
         setSelectedAnimal(null)
         setDisplayedPages(["MyAnimals"])
         handleCloseModal()

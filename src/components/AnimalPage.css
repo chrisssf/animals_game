@@ -1,5 +1,5 @@
 .animal-visit-container  {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-bottom: 200px;
 }
 
@@ -47,6 +47,69 @@
     justify-content: center;
 }
 
+.animal-visit-img-animation {
+    animation: animateAnimal 2s linear 1 1s;
+}
+
+@keyframes animateAnimal {
+    0% {
+
+    }
+    25% {
+        transform: rotate(30deg);   
+    }
+    50% {
+        transform: rotate(-30deg);  
+    }
+    75% {
+        transform: rotate(30deg); 
+    }
+    100% {
+        transform: rotate(0deg);    
+    }
+}
+
+.animal-visit-happy-face {
+    /* width: 150px; */
+    width: 0px;
+    position: absolute;
+    bottom: 380px;
+    animation: grow 1s ease-in 2 2s;
+}
+
+.animal-visit-happy-hearts-left {
+    /* width: 150px; */
+    width: 0px;
+    position: absolute;
+    bottom: 330px;
+    left: 500px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    animation: grow 1s ease-in 2 2s;
+}
+
+.animal-visit-happy-hearts-right {
+    /* width: 150px; */
+    width: 0px;
+    position: absolute;
+    bottom: 330px;
+    right: 500px;
+    
+    animation: grow 1s ease-in 2 2s;
+}
+
+@keyframes grow {
+    0% {
+        width: 0px;
+    }
+    50% {
+        width: 150px;    
+    }
+    100% {
+        width: 150px;    
+    }
+}
+
 /* .animal-visit-img-container > img { */
 .animal-visit-animal-img {
     width: 300px;
@@ -56,7 +119,7 @@
     width: 100px;
     position: absolute;
     visibility: hidden;
-    animation: giveItem 2s ease-in infinite;
+    animation: giveItem 2s ease-in 1;
 }
 
 @keyframes giveItem {

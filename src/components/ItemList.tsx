@@ -12,8 +12,10 @@ interface Props {
     items :Item[]
     player :Player
     setPlayer :(player :Player) => void
-    activity :string
-    giveAnimalItem? :(item :Item, itemIndex: number) => void
+    task :string
+    giveAnimalLove? :(activity :Activity, itemIndex: number) => void
+    giveAnimalFood? :(food :Food, itemIndex: number) => void
+    giveAnimalToy? :(toy :Toy, itemIndex: number) => void
     playerHasChanged :boolean
     setPlayerHasChanged :(boolean :boolean) => void
     buttonsDisabled? :boolean
@@ -23,8 +25,10 @@ const ItemList = ({
     items, 
     player, 
     setPlayer, 
-    activity, 
-    giveAnimalItem, 
+    task, 
+    giveAnimalLove,
+    giveAnimalFood,
+    giveAnimalToy,
     playerHasChanged, 
     setPlayerHasChanged,
     buttonsDisabled,
@@ -34,31 +38,30 @@ const ItemList = ({
     const myRefs :any = useRef([]); // FIX THE ANY!!!!!!!!
 
     const displayRemainingCooldown = (activity :Activity, index :number) =>{        
-        let secondsRemaining :number = Math.floor(activity.getCooldownRemaining())
-        if (secondsRemaining < 0) return
-        if (secondsRemaining === 0) {
-            // document.getElementById("thing" + index)!.innerText = "LOVE" 
+        let secondsRemaining :number = activity.getCooldownRemaining()
+        if (secondsRemaining < 0) {
+            // document.getElementById("activity" + index)!.innerText = "LOVE" 
             if(myRefs.current[index]) myRefs.current[index].innerText = "LOVE"
             return
         }
-        // if(document.getElementById("thing" + index) !== null) document.getElementById("thing" + index).innerText = secondsRemaining.toString()
-        // document.getElementById("thing" + index)!.innerText = "Wait " + secondsRemaining.toString() + "s" 
-        if(myRefs.current[index]) myRefs.current[index].innerText = "Wait " + secondsRemaining.toString() + "s"
+        // if(document.getElementById("activity" + index) !== null) document.getElementById("activity" + index).innerText = secondsRemaining.toString()
+        // document.getElementById("activity" + index)!.innerText = "Wait " + secondsRemaining.toString() + "s" 
+        if(myRefs.current[index]) myRefs.current[index].innerText = "Wait " + (Math.floor(secondsRemaining) + 1) + "s"
         setTimeout(()=> {
             displayRemainingCooldown(activity, index)
         }, 1000)
     }
 
     useEffect(() => {
-        items.forEach((activity :Item, index :number)=>{
-            if(activity instanceof Activity){
-                displayRemainingCooldown(activity, index)
+        items.forEach((item :Item, index :number)=>{
+            if(item instanceof Activity){
+                displayRemainingCooldown(item, index)
             }
         })
     },[buttonPressed])
 
     const displayItems = () :JSX.Element => {
-        let itemsToDisplay :JSX.Element[] = items.map((item, index) => {
+        let itemsToDisplay :JSX.Element[] = items.map((item :Item, index :number) => {
             return (
                 <div className="item-list-element" key={index}>
                     <h4>{item.getName()}</h4>
@@ -69,8 +72,11 @@ const ItemList = ({
                     {item instanceof Activity && <p>Cooldown: {item.getCooldown()}s</p>}
                     {/* {item instanceof Activity && <p id={"activity" + index}></p>} */}
                     {/* would be cleaner to move these to spearate component... */}
-                    {(item instanceof Toy || item instanceof Food) && activity.slice(0, 3) === "buy" && <button onClick={() => handleBuyItem(item)}>BUY</button>}
-                    {giveAnimalItem && <button ref={(el) => (myRefs.current[index] = el)} id={"thing" + index} disabled={buttonsDisabled} onClick={() => {giveAnimalItem(item, index) ; setButtonPressed(!buttonPressed)}}>{activity.toUpperCase()}</button>}
+                    {(item instanceof Toy || item instanceof Food) && task.slice(0, 3) === "buy" && <button onClick={() => handleBuyItem(item)}>BUY</button>}
+                    {/* {giveAnimalItem && <button ref={(el) => (myRefs.current[index] = el)} id={"activity" + index} disabled={buttonsDisabled} onClick={() => {giveAnimalItem(item, index) ; setButtonPressed(!buttonPressed)}}>{activity.toUpperCase()}</button>} */}
+                    {task === "feed" && taskButton(giveAnimalFood, item, index)}
+                    {task === "play" && taskButton(giveAnimalToy, item, index)}
+                    {task === "love" && taskButton(giveAnimalLove, item, index)}
                 </div>
             )
         })
@@ -80,6 +86,20 @@ const ItemList = ({
             </div>
         )
     }
+
+    const taskButton = (appropriateFunction :any, item :Item, index :number) :JSX.Element => { // fix any !!!!!!
+        let reference = null
+        if(task === "love") reference = (el :any) => (myRefs.current[index] = el)
+        return <button 
+            ref={reference}
+            disabled={buttonsDisabled}
+            onClick={() => {
+                appropriateFunction(item, index) 
+                setButtonPressed(!buttonPressed)
+            }}
+            >{task.toUpperCase()}</button>
+    }
+
 
     const handleBuyItem = (item :ShopItem) :void => {
         if(player.buyItem(item)) {

@@ -6,6 +6,8 @@ import Tiger from './models/Tiger';
 import Food from './models/Food';
 import Toy from './models/Toy';
 import Attack from './models/Attack';
+import Eagle from './models/Eagle';
+import Wolf from './models/Wolf'
 
 
 
@@ -69,14 +71,51 @@ let pounce = new Attack("Pounce", "Stealth", 10, "Incapacitate", 30)
 
 
 // making Animal instances
-let steve = new Snake("Steve", "Snake", 50, 10, pizza, teddy, [bite])
+let steve = new Snake("Steve", "Snake", 50, 10, banana, football, [bite])
+let sally = new Snake("Sally", "Snake", 50, 10, pasta, rubberDuck, [bite])
+let sarah = new Snake("Sarah", "Snake", 50, 10, pizza, teddy, [bite])
+let eddie = new Eagle("Eddie", "Eagle", 40, 15, salmon, rubberDuck, [claw])
+let ella = new Eagle("Ella", "Eagle", 40, 15, strawberries, teddy, [claw])
+let eric = new Eagle("Eric", "Eagle", 40, 15, burger, football, [claw])
 let bob = new Bear("Bob", "Bear", 50, 10, salmon, football, [claw])
+let bonnie = new Bear("Bonnie", "Bear", 50, 10, strawberries, teddy, [claw])
+let barry = new Bear("Barry", "Bear", 50, 10, banana, rubberDuck, [claw])
+let barney = new Bear("Barney", "Bear", 50, 10, pizza, football, [claw])
 let tina = new Tiger("Tina", "Tiger", 50, 10, burger, rubberDuck, [pounce])
+let thomas = new Tiger("Thomas", "Tiger", 50, 10, banana, football, [pounce])
+let tony = new Tiger("Tony", "Tiger", 50, 10, pasta, teddy, [pounce])
+let wallace = new Wolf("Wallace", "Wolf", 50, 10, pasta, rubberDuck, [pounce])
+let will = new Wolf("Will", "Wolf", 50, 10, pizza, teddy, [pounce])
+let winston = new Wolf("Winston", "Wolf", 50, 10, burger, football, [pounce])
+let walter = new Wolf("Walter", "Wolf", 50, 10, salmon, football, [pounce])
+
+
 
 let allAnimals :Animal[] = []
-allAnimals.push(steve)
 allAnimals.push(bob)
+allAnimals.push(ella)
+allAnimals.push(steve)
+allAnimals.push(winston)
+allAnimals.push(barry)
+allAnimals.push(thomas)
+allAnimals.push(sarah)
+allAnimals.push(walter)
 allAnimals.push(tina)
+allAnimals.push(barney)
+allAnimals.push(eric)
+allAnimals.push(sally)
+allAnimals.push(eddie)
+allAnimals.push(will)
+allAnimals.push(tony)
+allAnimals.push(bonnie)
+allAnimals.push(wallace)
+
+
+
+
+
+
+
 
 
 

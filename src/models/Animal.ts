@@ -4,7 +4,7 @@ import Attack from './Attack'
 import Character from './Character'
 import Activity from './Activity'
 
-abstract class Animal extends Character { // wolf eagle tiger bear snake => have 3 of each to choose from!!!
+abstract class Animal extends Character { 
     private type: string
     private health: number
     private maxHealth: number

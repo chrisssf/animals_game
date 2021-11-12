@@ -91,7 +91,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
                         items={foodForSale}
                         player={player}
                         setPlayer={setPlayer}
-                        activity={"buyFood"}
+                        task={"buyFood"}
                         playerHasChanged={playerHasChanged}
                         setPlayerHasChanged={setPlayerHasChanged}
                     />
@@ -102,7 +102,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
                         items={toysForSale}
                         player={player}
                         setPlayer={setPlayer}
-                        activity={"buyToys"}
+                        task={"buyToys"}
                         playerHasChanged={playerHasChanged}
                         setPlayerHasChanged={setPlayerHasChanged}
                     />
@@ -116,7 +116,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
                     items={player.getFoods()}
                     player={player}
                     setPlayer={setPlayer}
-                    activity={""}
+                    task={""}
                     playerHasChanged={playerHasChanged}
                     setPlayerHasChanged={setPlayerHasChanged}
                 />
@@ -127,7 +127,7 @@ const ShopPage = ({player, setPlayer, playerHasChanged, setPlayerHasChanged, dis
                     items={player.getToys()}
                     player={player}
                     setPlayer={setPlayer}
-                    activity={""}
+                    task={""}
                     playerHasChanged={playerHasChanged}
                     setPlayerHasChanged={setPlayerHasChanged}
                 />

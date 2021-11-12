@@ -25,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+      {console.log("player", player)}
       <header className="App-header">
         <h2>Adopt'emAll</h2>
         {player.getName() === "" && <StartPage 
@@ -62,6 +63,7 @@ function App() {
           setPlayerHasChanged={setPlayerHasChanged}
           displayedPages={displayedPages}
           setDisplayedPages={setDisplayedPages}
+          setAnimalDetailsModalIsOpen={setAnimalDetailsModalIsOpen}
         />
         {displayedPages.includes("Shop") && <ShopPage 
           player={player} 
